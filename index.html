@@ -40,7 +40,7 @@
       background-position: center;
       filter: blur(44px) saturate(0.9);
       opacity: 0.55;
-      animation: breathe 14s ease-in-out infinite;
+      animation: breathe 26s ease-in-out infinite;
       will-change: opacity;
     }
     @keyframes breathe {
@@ -68,7 +68,7 @@
       opacity: 0.07;
       mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-      animation: grain 1.6s steps(8) infinite;
+      animation: grain 3s steps(8) infinite;
     }
     @keyframes grain {
       0%   { transform: translate(0%, 0%); }
@@ -88,7 +88,7 @@
         linear-gradient(75deg,  transparent 25%, rgba(214, 198, 232, 0.08) 50%, transparent 72%),
         linear-gradient(140deg, transparent 35%, rgba(255, 220, 180, 0.06) 55%, transparent 75%);
       background-size: 200% 100%, 220% 100%, 240% 100%;
-      animation: aurora 13s ease-in-out infinite alternate;
+      animation: aurora 24s ease-in-out infinite alternate;
       will-change: background-position, transform;
     }
     @keyframes aurora {
@@ -96,25 +96,7 @@
       50%  { background-position: 30%  0%, -25% 0%,  15% 0%; transform: translate(1%, -1%) scale(1.04); }
       100% { background-position: -20% 0%,  20% 0%, -10% 0%; transform: translate(-1%, 1%) scale(1); }
     }
-    /* layer 5: diagonal sweeping scan-beam (soft light passing across the wall) */
-    .scanline {
-      position: fixed;
-      inset: -10%;
-      z-index: -2;
-      pointer-events: none;
-      background: linear-gradient(108deg,
-        transparent 42%,
-        rgba(255, 255, 255, 0.05) 49%,
-        rgba(255, 255, 255, 0.10) 50%,
-        rgba(255, 255, 255, 0.05) 51%,
-        transparent 58%);
-      animation: scan 11s linear infinite;
-    }
-    @keyframes scan {
-      0%   { transform: translateX(-60%); }
-      100% { transform: translateX(60%); }
-    }
-    /* layer 6: drifting cool light blobs sweeping across the wall */
+    /* layer 5: drifting cool light blobs sweeping across the wall */
     .glow {
       position: fixed;
       inset: 0;
@@ -124,7 +106,7 @@
         radial-gradient(36% 36% at 78% 68%, rgba(140, 160, 180, 0.22), transparent 70%),
         radial-gradient(28% 28% at 62% 18%, rgba(220, 235, 250, 0.16), transparent 70%),
         radial-gradient(32% 32% at 40% 82%, rgba(110, 130, 150, 0.22), transparent 70%);
-      animation: drift 12s ease-in-out infinite alternate;
+      animation: drift 22s ease-in-out infinite alternate;
       will-change: transform, opacity;
     }
     @keyframes drift {
@@ -313,7 +295,6 @@
 <div class="bricks" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 <div class="aurora" aria-hidden="true"></div>
-<div class="scanline" aria-hidden="true"></div>
 <div class="glow" aria-hidden="true"></div>
 
 <header>
