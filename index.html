@@ -28,8 +28,17 @@
     }
     .wrap { max-width: 860px; margin: 0 auto; padding: 0 22px; }
     header {
-      padding: 56px 0 28px;
+      padding: 48px 0 28px;
       text-align: center;
+    }
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 4px 18px rgba(3, 149, 222, 0.22);
+      margin-bottom: 18px;
     }
     header h1 {
       font-size: 2.1rem;
@@ -130,6 +139,7 @@
 
 <header>
   <div class="wrap">
+    <img class="avatar" src="1.jpg" alt="Portrait of DingTian Xue" />
     <h1>DingTian Xue <span class="cn">薛丁天</span></h1>
     <div class="role">Computer Vision Researcher · Edge AI &amp; Mobile Vision</div>
     <div class="tagline">Lightweight models · Efficient deployment · Hyperspectral analysis · Limited-supervision learning</div>
