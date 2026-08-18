@@ -1,25 +1,324 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>
-    
-    open the door!!!
-    
-    
-  </title>
-  </head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="DingTian Xue" />
+  <meta name="description" content="Academic homepage of DingTian Xue (薛丁天) — Computer Vision Researcher, edge AI deployment, lightweight neural networks, hyperspectral image clustering." />
+  <meta name="keywords" content="DingTian Xue, 薛丁天, computer vision, edge AI, hyperspectral, deep learning, MobileNet, S2DL" />
+  <title>DingTian Xue | Computer Vision Researcher</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --card: #ffffff;
+      --ink: #1f2430;
+      --muted: #5d6678;
+      --accent: #0395de;
+      --accent-dark: #0277b5;
+      --line: #e3e0d9;
+      --code-bg: #eef1f5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Segoe UI", "Source Sans 3", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 22px; }
+    header {
+      padding: 56px 0 28px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    header h1 .cn { color: var(--muted); font-weight: 400; font-size: 1.5rem; }
+    header .role {
+      margin-top: 6px;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+    }
+    header .tagline { margin-top: 10px; color: var(--muted); font-size: 0.98rem; }
+    .contact {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 18px;
+      font-size: 0.92rem;
+    }
+    .contact a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--muted); }
+    .contact a:hover { color: var(--accent); border-color: var(--accent); }
+    nav {
+      position: sticky; top: 0;
+      background: rgba(246, 244, 239, 0.94);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
+      padding: 10px 0;
+    }
+    nav .wrap { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 22px; }
+    nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 3px 2px;
+    }
+    nav a:hover { color: var(--accent); }
+    main { padding: 30px 0 10px; }
+    section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 26px 28px; margin-bottom: 22px; }
+    h2 {
+      font-size: 1.28rem;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    h3 { font-size: 1.02rem; margin: 14px 0 6px; }
+    p { margin-bottom: 10px; }
+    ul { margin: 6px 0 10px 22px; }
+    li { margin-bottom: 6px; }
+    .muted { color: var(--muted); }
+    .small { font-size: 0.88rem; }
+    a { color: var(--accent-dark); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background: var(--code-bg); padding: 1px 6px; border-radius: 4px; font-size: 0.88em; }
+    .item { margin-bottom: 18px; }
+    .item-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+    .item-head .title { font-weight: 600; font-size: 1.02rem; }
+    .item-head .date { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+    .org { color: var(--muted); font-size: 0.92rem; }
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 1px 9px;
+      border-radius: 999px;
+      margin-left: 6px;
+      vertical-align: 2px;
+    }
+    .tags { margin-top: 6px; }
+    .tag {
+      display: inline-block;
+      background: var(--code-bg);
+      color: var(--ink);
+      font-size: 0.78rem;
+      padding: 2px 10px;
+      border-radius: 999px;
+      margin: 2px 4px 2px 0;
+    }
+    .feature { background: #eef8fe; border-left: 4px solid var(--accent); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+    footer { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 26px 0 40px; }
+    footer a { color: var(--muted); }
+    @media (max-width: 600px) {
+      header { padding: 36px 0 20px; }
+      section { padding: 20px 18px; }
+    }
+  </style>
+</head>
 <body>
-  
-  <p> upset</p>
-  <h1> prepare 1</h1>
-  <h2> prepare 2</h2>
-<
-  
-  
-  
-  </body>
-  
-  
-  
-  
+
+<header>
+  <div class="wrap">
+    <h1>DingTian Xue <span class="cn">薛丁天</span></h1>
+    <div class="role">Computer Vision Researcher · Edge AI &amp; Mobile Vision</div>
+    <div class="tagline">Lightweight models · Efficient deployment · Hyperspectral analysis · Limited-supervision learning</div>
+    <div class="contact">
+      <a href="mailto:zhongliwansui@outlook.com">✉ zhongliwansui@outlook.com</a>
+      <a href="tel:+8615830122368">☎ (+86) 158-3012-2368</a>
+      <a href="https://github.com/KBber" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/dingtian-xue" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://kbber.github.io" target="_blank" rel="noopener">kbber.github.io</a>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#about">About</a>
+    <a href="#research">Research Interests</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#honors">Honors &amp; Certificates</a>
+    <a href="#skills">Skills</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a Computer Vision Researcher with a B.E. in Computer Science from
+      <strong>Yanshan University</strong> (2025, GPA 80.36/100, Top 33%), currently working as a
+      Computer Vision Engineer at Tiandy Technologies while pursuing self-directed research toward
+      Ph.D. opportunities. My research interests lie at the intersection of
+      <strong>edge AI deployment, lightweight neural networks, and hyperspectral image analysis</strong>
+      — building models that are accurate under limited supervision and efficient enough to run on real devices.
+    </p>
+    <p>
+      I am currently <strong>independently reproducing and extending the S2DL method</strong>
+      (Cui et al., IEEE TGRS 2024) for unsupervised hyperspectral image clustering — a line of work I plan
+      to continue at the doctoral level. My undergraduate edge-AI project, a 245-class mobile garbage
+      classifier, is fully open-sourced on GitHub.
+    </p>
+    <div class="feature">
+      <strong>Looking for:</strong> Ph.D. / Research Assistant positions in computer vision, with a focus on
+      annotation-efficient learning, hyperspectral and remote-sensing analysis, and edge deployment.
+      See my <a href="#research">research proposal</a> outline below.
+    </div>
+  </section>
+
+  <section id="research">
+    <h2>Research Interests</h2>
+    <ul>
+      <li><strong>Edge AI &amp; lightweight neural networks</strong> — model compression, quantization, mobile/embedded deployment</li>
+      <li><strong>Hyperspectral image analysis</strong> — unsupervised clustering, diffusion geometry, superpixel priors</li>
+      <li><strong>Limited-supervision learning</strong> — self-supervised and semi-supervised methods for scarce labels</li>
+      <li><strong>Small-object recognition</strong> — detection/segmentation of tiny, low-contrast targets in remote sensing and medical imagery</li>
+    </ul>
+    <h3>Doctoral Research Direction (Proposal Outline)</h3>
+    <p class="small">
+      <em>Annotation-Efficient and Edge-Deployable Learning for Hyperspectral Clustering and Small-Object
+      Recognition in Remote Sensing and Medical Imaging.</em>
+      Building directly on my reproduction of S2DL, the proposed work investigates:
+      (1) geometry-aware, label-efficient hyperspectral clustering; (2) small-object detection/segmentation
+      under limited annotations; and (3) deployment-aware compression that preserves small and subtle targets.
+      Target venues: TGRS, MICCAI, ISBI, ICMR, IGARSS.
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects &amp; Open Source</h2>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="title">Independent Reproduction of S2DL <span class="badge">Research</span></span>
+        <span class="date">Aug. 2025 – Present</span>
+      </div>
+      <div class="org">"Superpixel-based and Spatially-regularized Diffusion Learning for Unsupervised Hyperspectral Image Clustering" — Cui et al., IEEE TGRS 2024 · <code>github.com/KBber/S2DL</code></div>
+      <ul>
+        <li>Independently re-implemented S2DL in <strong>MATLAB R2024b</strong>; fixed the MinGW/MEX toolchain and modernized syntax (4 commits to the official fork).</li>
+        <li>Reproduced the published result on Indian Pines: <strong>OA = 64.70%, Kappa = 0.6020</strong>.</li>
+        <li>Built a single-evaluation entry-point script that bypasses the 225k-eval grid search for fast hyper-parameter iteration.</li>
+        <li><em>Next:</em> extend to Salinas/SalinasA and UAV imagery; rebuild the S2DL vs. SRDL/D-VIC/LUND comparison table.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="title">edgeai-trash-classifier — 245-class Edge AI Garbage Classification <span class="badge">Open Source</span></span>
+        <span class="date">Jan. 2024 – Apr. 2025</span>
+      </div>
+      <div class="org">Graduation Project · <code>github.com/KBber/edgeai-trash-classifier</code> (MIT)</div>
+      <ul>
+        <li>Compared MobileNetV2 / ResNet / plain CNN backbones with ImageNet transfer learning; best model reaches <strong>~92% Top-1</strong> on a held-out 245-class set at <strong>16.2 MB</strong>.</li>
+        <li>Deployed with PyTorch-Mobile (TorchScript + <code>optimize_for_mobile</code>) into an Android app (CameraX live detection); end-to-end latency <strong>~65 ms</strong> on a mid-tier Snapdragon device.</li>
+        <li>Released with deterministic seeds, smoke tests and GitHub-Actions CI (reproducible-research hygiene).</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="title">Vision-based Temperature-Measuring Patrol Vehicle <span class="badge">Project</span></span>
+        <span class="date">Jul. 2023 – Jul. 2024</span>
+      </div>
+      <div class="org">Project Lead (team of 3) · Raspberry Pi + STM32</div>
+      <ul>
+        <li>Built a low-cost line-following and temperature-sensing inspection robot (Raspberry Pi camera + STM32 motor controller).</li>
+        <li>Implemented a classical-CV pipeline: acquisition → ROI selection → edge-/Hough-based trajectory detection → direction decision → actuator command; stable line-following under variable lighting with a mobile remote-viewing interface.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Work Experience</h2>
+    <div class="item">
+      <div class="item-head">
+        <span class="title">Computer Vision Engineer — Presales &amp; On-site Delivery</span>
+        <span class="date">Jul. 2025 – Present</span>
+      </div>
+      <div class="org">Tiandy Technologies Co., Ltd. · Tianjin, China</div>
+      <ul>
+        <li>Embedded deep-learning vision models (object detection / segmentation) into product pipelines for the political-legal and smart-city verticals.</li>
+        <li>Coordinated dataset curation and pre-processing of unstructured on-site imagery; converted raw footage into model-ready training sets.</li>
+        <li>Migrated PyTorch/ONNX models to GPU/edge servers and tuned inference for real-time constraints (FPS, latency); resolved deployment-environment issues.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="item">
+      <div class="item-head">
+        <span class="title">B.E. in Computer Science and Technology</span>
+        <span class="date">Sep. 2021 – Jun. 2025</span>
+      </div>
+      <div class="org">Yanshan University · Qinhuangdao, Hebei, China</div>
+      <p class="small">GPA-P 80.36 / 100 (Top 33%). Selected coursework: Discrete Mathematics 94, Computer Networks 90, Linear Algebra 89, Computer Control Theory 89, Computer Organisation Project 90, Compiler Principles 89, Object-Oriented Programming 87, Software Engineering 82.</p>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="title">M.S. in Computer Technology (085404) — Admitted, declined</span>
+        <span class="date">Admitted 2025</span>
+      </div>
+      <div class="org">Dalian University of Technology</div>
+      <p class="small">Admitted via the national graduate entrance examination; declined enrollment to pursue a full-time industry role and self-directed research, transitioning toward a research-aligned Ph.D./RA trajectory.</p>
+    </div>
+  </section>
+
+  <section id="honors">
+    <h2>Honors &amp; Certificates</h2>
+    <div class="item-head">
+      <span class="title">Honors</span>
+    </div>
+    <ul>
+      <li>Second Prize — Blue Bridge Cup Software Competition (Provincial), 2024</li>
+      <li>Second &amp; Third-Class Scholarship — Yanshan University, 2021–2023</li>
+      <li>Outstanding Student Cadre — Yanshan University, 2022</li>
+      <li>Excellence Award — "Internet+" Innovation &amp; Entrepreneurship Competition (University Level), 2022</li>
+      <li>University-level Project — College Students' Innovation &amp; Entrepreneurship Training Program, 2022–2024</li>
+      <li>Outstanding Individual in Production Internship — Yanshan University, 2024</li>
+    </ul>
+    <div class="item-head" style="margin-top: 16px;">
+      <span class="title">Certificates</span>
+    </div>
+    <ul>
+      <li>College English Test Band 6 (CET-6), 458/710 — 2023</li>
+      <li>National Computer Rank Examination — Level 4 — 2024</li>
+      <li>Mandarin Proficiency Test — Level 2A — 2022</li>
+    </ul>
+  </section>
+
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <div class="tags">
+      <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">MATLAB</span><span class="tag">C/C++</span>
+      <span class="tag">TensorFlow/Keras</span><span class="tag">PyTorch Mobile</span><span class="tag">OpenCV</span><span class="tag">YOLO</span>
+      <span class="tag">MobileNetV2 / ResNet</span><span class="tag">Android (CameraX)</span><span class="tag">ONNX</span><span class="tag">Git / CI</span>
+    </div>
+    <h3>Research skills (self-studying)</h3>
+    <p class="small">Spectral methods, manifold learning, graph-based clustering, diffusion learning; NumPy, scikit-learn, PyTorch Geometric; LaTeX for academic writing.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    © 2026 DingTian Xue · Built with plain HTML/CSS · <a href="https://github.com/KBber/KBber.github.io" target="_blank" rel="noopener">Source</a>
+  </div>
+</footer>
+
+</body>
 </html>
