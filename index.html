@@ -276,6 +276,53 @@
       margin: 14px 0 4px;
       font-weight: 300;
     }
+    /* ---------- news & publications ---------- */
+    .news-date {
+      display: inline-block;
+      min-width: 56px;
+      padding: 1px 10px;
+      margin-right: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.5px;
+    }
+    #news li { line-height: 1.85; }
+    .pub-item {
+      padding: 12px 0 14px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+    }
+    .pub-item:first-of-type { padding-top: 4px; }
+    .pub-item:last-of-type { border-bottom: 0; padding-bottom: 0; }
+    .pub-line { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; margin-bottom: 4px; }
+    .pub-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 1px 9px;
+      border-radius: 999px;
+      background: rgba(159, 195, 232, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(159, 195, 232, 0.3);
+    }
+    .pub-venue {
+      color: var(--muted);
+      font-size: 0.83rem;
+      font-weight: 400;
+    }
+    .pub-title {
+      font-weight: 500;
+      color: #f2f5f8;
+      font-size: 0.97rem;
+      margin-bottom: 4px;
+    }
+    .pub-authors { color: var(--muted); font-size: 0.85rem; margin-bottom: 2px; }
+    .pub-item p { margin-top: 6px; color: var(--muted); }
+    .muted { color: var(--muted); }
 
     /* ---------- footer ---------- */
     footer { text-align: center; color: var(--muted); font-size: 0.83rem; padding: 30px 0 46px; font-weight: 300; }
@@ -304,8 +351,7 @@
     <div class="role">Computer Vision Researcher · Edge AI &amp; Mobile Vision</div>
     <div class="tagline">Lightweight models · Efficient deployment · Hyperspectral analysis · Limited-supervision learning</div>
     <div class="contact">
-      <a href="mailto:zhongliwansui@outlook.com">✉ zhongliwansui@outlook.com</a>
-      <a href="tel:+8615830122368">☎ (+86) 158-3012-2368</a>
+      <a href="mailto:zhongliwansui@outlook.com">✉ zh****wansui@outlook.com</a>
       <a href="https://github.com/KBber" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/dingtian-xue" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://kbber.github.io" target="_blank" rel="noopener">kbber.github.io</a>
@@ -316,7 +362,9 @@
 <nav>
   <div class="wrap">
     <a href="#about">About</a>
-    <a href="#research">Research Interests</a>
+    <a href="#news">News</a>
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
     <a href="#projects">Projects</a>
     <a href="#experience">Experience</a>
     <a href="#education">Education</a>
@@ -328,7 +376,7 @@
 <main class="wrap">
 
   <section id="about">
-    <h2>About Me</h2>
+    <h2>👤 About Me</h2>
     <p>
       I am a Computer Vision Researcher with a B.E. in Computer Science from
       <strong>Yanshan University</strong> (2025, GPA 80.36/100, Top 33%), currently working as a
@@ -350,8 +398,17 @@
     </div>
   </section>
 
+  <section id="news">
+    <h2>🔥 News &amp; Updates</h2>
+    <ul>
+      <li><span class="news-date">2026</span> · Building this site and self-directedly pushing toward a Ph.D. in computer vision; actively extending the S2DL reproduction to Salinas / SalinasA and UAV imagery.</li>
+      <li><span class="news-date">2025</span> · Joined Tiandy Technologies as a Computer Vision Engineer (presales &amp; on-site delivery); continued the S2DL reproduction in MATLAB R2024b on the side.</li>
+      <li><span class="news-date">2025</span> · Graduated from Yanshan University (B.E. in Computer Science, Top 33%) and open-sourced the 245-class edge-AI garbage classifier.</li>
+    </ul>
+  </section>
+
   <section id="research">
-    <h2>Research Interests</h2>
+    <h2>🧪 Research Interests</h2>
     <ul>
       <li><strong>Edge AI &amp; lightweight neural networks</strong> — model compression, quantization, mobile/embedded deployment</li>
       <li><strong>Hyperspectral image analysis</strong> — unsupervised clustering, diffusion geometry, superpixel priors</li>
@@ -369,8 +426,27 @@
     </p>
   </section>
 
+  <section id="publications">
+    <h2>📄 Publications &amp; Outputs</h2>
+    <div class="pub-item">
+      <div class="pub-line"><span class="pub-tag">Technical Note</span><span class="pub-venue">Independent MATLAB Reproduction</span></div>
+      <div class="pub-title">Superpixel-based and Spatially-regularized Diffusion Learning for Unsupervised Hyperspectral Image Clustering (S2DL)</div>
+      <div class="pub-authors"><strong>DingTian XUE</strong> (reproducing)</div>
+      <div class="pub-venue">Original: K. Cui et al., <em>IEEE TGRS</em>, 2024 · <code>github.com/KBber/S2DL</code></div>
+      <p class="small">Indian Pines: <strong>OA = 64.70%, Kappa = 0.6020</strong> (matches published). Extension to Salinas/SalinasA and UAV imagery in progress.</p>
+    </div>
+    <div class="pub-item">
+      <div class="pub-line"><span class="pub-tag">Open Source</span><span class="pub-venue">Undergraduate Project</span></div>
+      <div class="pub-title">edgeai-trash-classifier — 245-class Mobile Garbage Classification</div>
+      <div class="pub-authors"><strong>DingTian XUE</strong></div>
+      <div class="pub-venue"><code>github.com/KBber/edgeai-trash-classifier</code> · MIT license</div>
+      <p class="small">MobileNetV2 + 3-layer MLP head · 16.2 MB · ~92% Top-1 · ~65 ms end-to-end on a mid-tier Snapdragon device.</p>
+    </div>
+    <p class="small muted">Papers and theses under the supervision of Prof. Kangning Cui are in preparation; see <a href="#research">research</a> for the proposed doctoral direction.</p>
+  </section>
+
   <section id="projects">
-    <h2>Projects &amp; Open Source</h2>
+    <h2>💻 Projects &amp; Open Source</h2>
 
     <div class="item">
       <div class="item-head">
@@ -413,13 +489,13 @@
   </section>
 
   <section id="experience">
-    <h2>Work Experience</h2>
+    <h2>💼 Work Experience</h2>
     <div class="item">
       <div class="item-head">
         <span class="title">Computer Vision Engineer — Presales &amp; On-site Delivery</span>
         <span class="date">Jul. 2025 – Present</span>
       </div>
-      <div class="org">Tiandy Technologies Co., Ltd. · Tianjin, China</div>
+      <div class="org">Tiandy Technologies Co., Ltd. · China</div>
       <ul>
         <li>Embedded deep-learning vision models (object detection / segmentation) into product pipelines for the political-legal and smart-city verticals.</li>
         <li>Coordinated dataset curation and pre-processing of unstructured on-site imagery; converted raw footage into model-ready training sets.</li>
@@ -429,7 +505,7 @@
   </section>
 
   <section id="education">
-    <h2>Education</h2>
+    <h2>🎓 Education</h2>
     <div class="item">
       <div class="item-head">
         <span class="title">B.E. in Computer Science and Technology</span>
@@ -449,7 +525,7 @@
   </section>
 
   <section id="honors">
-    <h2>Honors &amp; Certificates</h2>
+    <h2>🏆 Honors &amp; Certificates</h2>
     <div class="item-head">
       <span class="title">Honors</span>
     </div>
@@ -472,7 +548,7 @@
   </section>
 
   <section id="skills">
-    <h2>Technical Skills</h2>
+    <h2>🛠️ Technical Skills</h2>
     <div class="tags">
       <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">MATLAB</span><span class="tag">C/C++</span>
       <span class="tag">TensorFlow/Keras</span><span class="tag">PyTorch Mobile</span><span class="tag">OpenCV</span><span class="tag">YOLO</span>
