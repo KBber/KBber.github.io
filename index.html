@@ -21,10 +21,9 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
-    /* ---------- perf-optimised premium-grey brick-wall background ----------
-       Strategy: keep the chessboard breathing (SVG inline <animate>, GPU-cheap),
-       drop all backdrop-filter, mix-blend-mode, animated filter, large box-shadow,
-       and the .glow layer. Use opacity/transform-only animations on cheap layers. */
+    /* perf-optimised grey brick-wall background. Keeps the chessboard breathing
+       via SVG-internal <animate> only (GPU-cheap). No backdrop-filter / blend-mode /
+       animated filter / large shadow. */
     body {
       font-family: "Segoe UI", "Source Sans 3", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
       background: var(--bg);
@@ -73,8 +72,8 @@
       80%  { transform: translate(2%, 1%); }
       100% { transform: translate(0%, 0%); }
     }
-    /* NOTE: .aurora and .glow layers removed for performance - the brick wall
-       chessboard alone carries the "alive" feeling without layered radial-gradient repaints. */
+    /* NOTE: aurora/glow layers removed for performance; the brick-wall chessboard
+       alone carries the alive feeling without layered radial-gradient repaints. */
 
     .wrap { max-width: 880px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 1; }
 
