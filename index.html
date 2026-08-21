@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="DingTian Xue" />
-  <meta name="description" content="Academic homepage of DingTian Xue (薛丁天) — Computer Vision Researcher, edge AI deployment, lightweight neural networks, hyperspectral image clustering." />
-  <meta name="keywords" content="DingTian Xue, 薛丁天, computer vision, edge AI, hyperspectral, deep learning, MobileNet, S2DL" />
+  <meta name="description" content="Academic homepage of DingTian Xue (薛丁天) — Computer Vision Researcher, edge AI deployment, lightweight neural networks, hyperspectral image clustering, Chinese NER, sequence labeling." />
+  <meta name="keywords" content="DingTian Xue, 薛丁天, computer vision, edge AI, hyperspectral, deep learning, MobileNet, S2DL, Chinese NER, sequence labeling, BERT, CRF, LoRA, Qwen" />
   <title>DingTian Xue | Computer Vision Researcher</title>
   <style>
     :root {
@@ -318,6 +318,7 @@
   <section id="news">
     <h2>🔥 News &amp; Updates</h2>
     <ul>
+      <li><span class="news-date">2026</span> · Released <strong><a href="https://github.com/KBber/chinese-ner-sequence-labeling" target="_blank" rel="noopener">chinese-ner-sequence-labeling</a></strong> — a four-paradigm study (BERT+Linear, BERT+CRF, LLM API, LLM SFT-LoRA) of Chinese NER on CLUENER2020 &amp; People's Daily.</li>
       <li><span class="news-date">2026</span> · Building this site and self-directedly pushing toward a Ph.D. in computer vision; actively extending the S2DL reproduction to Salinas / SalinasA and UAV imagery.</li>
       <li><span class="news-date">2025</span> · Joined Tiandy Technologies as a Computer Vision Engineer (presales &amp; on-site delivery); continued the S2DL reproduction in MATLAB R2024b on the side.</li>
       <li><span class="news-date">2025</span> · Graduated from Yanshan University (B.E. in Computer Science, Top 33%) and open-sourced the 245-class edge-AI garbage classifier.</li>
@@ -353,6 +354,13 @@
       <p class="small">Indian Pines: <strong>OA = 64.70%, Kappa = 0.6020</strong> (matches published). Extension to Salinas/SalinasA and UAV imagery in progress.</p>
     </div>
     <div class="pub-item">
+      <div class="pub-line"><span class="pub-tag">Open Source</span><span class="pub-venue">Course Capstone</span></div>
+      <div class="pub-title">chinese-ner-sequence-labeling — Four-Paradigm Comparison of Chinese NER</div>
+      <div class="pub-authors"><strong>DingTian XUE</strong></div>
+      <div class="pub-venue"><code>github.com/KBber/chinese-ner-sequence-labeling</code> · MIT license</div>
+      <p class="small">BERT + Linear / BERT + CRF / LLM API / LLM SFT-LoRA · CLUENER2020 &amp; People's Daily · seqeval entity-level F1.</p>
+    </div>
+    <div class="pub-item">
       <div class="pub-line"><span class="pub-tag">Open Source</span><span class="pub-venue">Undergraduate Project</span></div>
       <div class="pub-title">edgeai-trash-classifier — 245-class Mobile Garbage Classification</div>
       <div class="pub-authors"><strong>DingTian XUE</strong></div>
@@ -364,6 +372,20 @@
 
   <section id="projects">
     <h2>💻 Projects &amp; Open Source</h2>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="title">chinese-ner-sequence-labeling — Four-Paradigm Chinese NER Study <span class="badge">Open Source</span></span>
+        <span class="date">2026</span>
+      </div>
+      <div class="org">NLP · Sequence Labeling · <code>github.com/KBber/chinese-ner-sequence-labeling</code> (MIT)</div>
+      <ul>
+        <li>A systematic comparison of <strong>four NER paradigms</strong> on Chinese text: <strong>BERT + Linear</strong> (per-token classification), <strong>BERT + CRF</strong> (global sequence decoding), <strong>LLM API prompting</strong> (Qwen-Plus zero-/few-shot), and <strong>LLM SFT-LoRA</strong> (Qwen2-0.5B instruction-tuned).</li>
+        <li>Built on <strong>CLUENER2020</strong> (10 fine-grained entity types, 10,748 / 1,343 train/val) and the <strong>People's Daily</strong> classical NER benchmark (PER / ORG / LOC).</li>
+        <li>Implemented the full pipeline: BIO conversion with subword alignment, AdamW with layer-wise learning rates &amp; linear warmup, seqeval entity-level F1, LoRA adapter training with loss masking, and a unified <code>compare_results.py</code> for cross-paradigm aggregation.</li>
+        <li>Designed as a <strong>Week-7 course capstone</strong> for <em>Sequence Labeling</em>; each paradigm answers a specific pedagogical question — when global decoding matters, how far prompted LLMs go on structured prediction, and the engineering trade-off of generative vs. discriminative NER.</li>
+      </ul>
+    </div>
 
     <div class="item">
       <div class="item-head">
@@ -470,9 +492,11 @@
       <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">MATLAB</span><span class="tag">C/C++</span>
       <span class="tag">TensorFlow/Keras</span><span class="tag">PyTorch Mobile</span><span class="tag">OpenCV</span><span class="tag">YOLO</span>
       <span class="tag">MobileNetV2 / ResNet</span><span class="tag">Android (CameraX)</span><span class="tag">ONNX</span><span class="tag">Git / CI</span>
+      <span class="tag">HuggingFace Transformers</span><span class="tag">PEFT / LoRA</span><span class="tag">BERT</span><span class="tag">pytorch-crf</span>
+      <span class="tag">seqeval</span><span class="tag">Qwen / LLM API</span>
     </div>
     <h3>Research skills (self-studying)</h3>
-    <p class="small">Spectral methods, manifold learning, graph-based clustering, diffusion learning; NumPy, scikit-learn, PyTorch Geometric; LaTeX for academic writing.</p>
+    <p class="small">Spectral methods, manifold learning, graph-based clustering, diffusion learning; NumPy, scikit-learn, PyTorch Geometric; NLP / sequence labeling (BERT, CRF, LoRA SFT); LaTeX for academic writing.</p>
   </section>
 
 </main>
