@@ -4,6 +4,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import ClockGreeting from '@components/ClockGreeting.astro';
 import WeatherCard from '@components/WeatherCard.astro';
 import MagneticCardStack from '@components/MagneticCardStack';
+import Galaxy from '@components/Galaxy';
 import SITE_CONFIG from '../../site.config';
 
 const posts = (await getCollection('posts', ({ data }) => !data.draft))
@@ -40,6 +41,7 @@ const magnetItems = [
 ---
 
 <BaseLayout title="" activeNav="/">
+  <Galaxy client:only="react" />
   <section class="hero">
     <div class="hero-card liquid-glass">
       <span class="liquid-glass-pill">Welcome to my corner</span>
