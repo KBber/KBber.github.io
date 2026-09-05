@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ClockGreeting from '@components/ClockGreeting.astro';
+import WeatherCard from '@components/WeatherCard.astro';
+import MagneticCardStack from '@components/MagneticCardStack';
+import SITE_CONFIG from '../../site.config';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
+  .slice(0, 4);
+
+const moments = (await getCollection('moments'))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
+  .slice(0, 3);
+
+const magnetItems = [
+  {
+    id: 'm1',
+    title: '📝 最近在写',
+    body: '把一些零散的工具整理成文章。',
+    href: '/posts',
+    accent: '#3B82F6',
+  },
+  {
+    id: 'm2',
+    title: '📷 镜头之外',
+    body: '把生活和截图放进相册里。',
+    href: '/albums',
+    accent: '#22c55e',
+  },
+  {
+    id: 'm3',
+    title: '💡 一些碎碎念',
+    body: '今日一句话：保持好奇，慢慢来。',
+    href: '/moments',
+    accent: '#a855f7',
+  },
+];
+---
+
+<BaseLayout title="" activeNav="/">
+  <section class="hero">
+    <div class="hero-card liquid-glass">
+      <span class="liquid-glass-pill">Welcome to my corner</span>
+      <h1 class="hero-greeting">{SITE_CONFIG.profile.displayName}</h1>
+      <ClockGreeting />
+    </div>
+
+    <div class="widgets-row">
+      <WeatherCard />
+      <MagneticCardStack items={magnetItems} client:load />
+    </div>
+
+    <section>
+      <h2 class="section-title">最近文章</h2>
+      <div class="card-grid">
+        {posts.map((p) => (
+          <a class="entry-card liquid-glass" href={`/posts/${p.id}/`}>
+            <div class="meta">
+              <time datetime={p.data.pubDate.toISOString()}>
+                {p.data.pubDate.toLocaleDateString('zh-CN')}
+              </time>
+              {p.data.tags.slice(0, 1).map((t) => <span class="tag">{t}</span>)}
+            </div>
+            <h3>{p.data.title}</h3>
+            <p class="summary">{p.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">最近的随笔</h2>
+      <div class="liquid-glass" style="padding: 18px 22px;">
+        <ul class="timeline" style="margin: 0; padding-left: 28px; list-style: none;">
+          {moments.map((m) => (
+            <li class="timeline-item">
+              <time datetime={m.data.pubDate.toISOString()}>
+                {m.data.pubDate.toLocaleDateString('zh-CN')}
+                {m.data.mood && ` · ${m.data.mood}`}
+              </time>
+              <p>{m.body}</p>
+            </li>
+          ))}
+        </ul>
+        <p style="margin-top: 14px; text-align: right;">
+          <a href="/moments" style="color: var(--accent-soft)">查看全部 →</a>
+        </p>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

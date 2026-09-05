@@ -1,0 +1,11 @@
+{
+  "title": "校园一隅",
+  "description": "校园里随手拍的几张照片。",
+  "cover": "/assets/1.jpg",
+  "pubDate": "2025-09-01",
+  "photos": [
+    { "src": "/assets/1.jpg", "caption": "教学楼前" },
+    { "src": "/assets/2.jpg", "caption": "夕阳" },
+    { "src": "/assets/3.png", "caption": "雨后" }
+  ]
+}

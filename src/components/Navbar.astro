@@ -1,0 +1,66 @@
+---
+import SITE_CONFIG from '../../site.config';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props { active?: string }
+const { active } = Astro.props;
+const path = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') return path === '/' ? 'is-active' : '';
+  if (href === '/posts') return path.startsWith('/posts') ? 'is-active' : '';
+  if (href === '/albums') return path.startsWith('/albums') ? 'is-active' : '';
+  if (href === '/moments') return path.startsWith('/moments') ? 'is-active' : '';
+  if (href === '/notes') return path.startsWith('/notes') ? 'is-active' : '';
+  if (href === '/about') return path === '/about' ? 'is-active' : '';
+  return '';
+};
+---
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand" aria-label="Home">
+      <span class="logo" aria-hidden="true">K</span>
+      <span>{SITE_CONFIG.brand.name}</span>
+    </a>
+
+    <button
+      class="mobile-menu-btn"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-controls="primary-nav"
+      aria-expanded="false"
+      id="nav-menu-btn"
+    >
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+
+    <nav aria-label="Primary">
+      <ul id="primary-nav" class="nav-links">
+        {SITE_CONFIG.nav.map((item) => (
+          <li>
+            <a href={item.href} class={isActive(item.href) || (active === item.href ? 'is-active' : '')}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="nav-tools">
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('nav-menu-btn');
+  const list = document.getElementById('primary-nav');
+  if (btn && list) {
+    btn.addEventListener('click', () => {
+      const open = list.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  }
+</script>

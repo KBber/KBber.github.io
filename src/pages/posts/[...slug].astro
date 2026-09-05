@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ReadingProgress from '@components/ReadingProgress';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description} activeNav="/posts">
+  <ReadingProgress client:load />
+  <article class="prose">
+    <p style="font-size: 13px; color: var(--muted); margin-bottom: 4px;">
+      <time datetime={post.data.pubDate.toISOString()}>
+        {post.data.pubDate.toLocaleDateString('zh-CN')}
+      </time>
+      {post.data.tags.length > 0 && (
+        <span style="margin-left: 8px;">
+          {post.data.tags.map((t) => <span class="tag">{t}</span>)}
+        </span>
+      )}
+    </p>
+    <h1>{post.data.title}</h1>
+    <p style="color: var(--muted); margin-top: -10px;">{post.data.description}</p>
+    <hr style="border: none; border-top: 1px solid var(--line); margin: 24px 0;" />
+    <Content />
+    <hr style="border: none; border-top: 1px solid var(--line); margin: 40px 0 16px;" />
+    <p style="font-size: 13px; color: var(--muted);">
+      <a href="/posts">← 返回所有文章</a>
+    </p>
+  </article>
+</BaseLayout>

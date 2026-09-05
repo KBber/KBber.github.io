@@ -1,0 +1,102 @@
+---
+// Weather card with IP geolocation + Open-Meteo, with graceful fallback.
+// No external API keys required.
+---
+
+<aside class="weather-card liquid-glass" aria-label="Weather">
+  <h3>天气</h3>
+  <div class="weather-row">
+    <span class="weather-temp" id="w-temp">--°</span>
+    <span class="weather-desc" id="w-desc">定位中…</span>
+  </div>
+  <div class="weather-location" id="w-loc">—</div>
+  <div class="weather-hourly" id="w-hourly" aria-live="polite"></div>
+</aside>
+
+<script>
+  const CODES: Record<number, { icon: string; text: string }> = {
+    0: { icon: '☀️', text: '晴朗' },
+    1: { icon: '🌤️', text: '晴间多云' },
+    2: { icon: '⛅', text: '多云' },
+    3: { icon: '☁️', text: '阴' },
+    45: { icon: '🌫️', text: '雾' },
+    48: { icon: '🌫️', text: '浓雾' },
+    51: { icon: '🌦️', text: '毛毛雨' },
+    53: { icon: '🌦️', text: '小雨' },
+    55: { icon: '🌧️', text: '中雨' },
+    61: { icon: '🌧️', text: '小雨' },
+    63: { icon: '🌧️', text: '中雨' },
+    65: { icon: '🌧️', text: '大雨' },
+    71: { icon: '🌨️', text: '小雪' },
+    73: { icon: '❄️', text: '中雪' },
+    75: { icon: '❄️', text: '大雪' },
+    80: { icon: '🌦️', text: '阵雨' },
+    81: { icon: '🌧️', text: '强阵雨' },
+    82: { icon: '⛈️', text: '暴雨' },
+    95: { icon: '⛈️', text: '雷阵雨' },
+  };
+
+  const elTemp = document.getElementById('w-temp');
+  const elDesc = document.getElementById('w-desc');
+  const elLoc = document.getElementById('w-loc');
+  const elHr = document.getElementById('w-hourly');
+
+  function showFallback() {
+    if (elTemp) elTemp.textContent = '--°';
+    if (elDesc) elDesc.textContent = '无法获取';
+    if (elLoc) elLoc.textContent = '本地';
+    if (elHr) elHr.innerHTML = '<span class="hourly-pill">—</span>';
+  }
+
+  async function fetchWeather(lat: number, lon: number, name: string) {
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,weathercode&forecast_days=2`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('weather api');
+      const data = await res.json();
+      const info = CODES[data.current_weather.weathercode] || { icon: '🌿', text: '宜出行' };
+      if (elTemp) elTemp.textContent = `${Math.round(data.current_weather.temperature)}°`;
+      if (elDesc) elDesc.textContent = `${info.text} ${info.icon}`;
+      if (elLoc) elLoc.textContent = name;
+
+      if (elHr) {
+        const now = new Date();
+        const cur = now.toISOString().slice(0, 13);
+        const idx = Math.max(0, data.hourly.time.findIndex((t: string) => t.startsWith(cur)));
+        const hours = [1, 2, 3].map((i) => {
+          const ix = idx + i;
+          const t = data.hourly.time[ix].slice(11, 16);
+          const c = CODES[data.hourly.weathercode[ix]] || { icon: '🌤️', text: '' };
+          const tp = Math.round(data.hourly.temperature_2m[ix]);
+          return `<span class="hourly-pill">${t} ${c.icon} ${tp}°</span>`;
+        });
+        elHr.innerHTML = hours.join('<span class="hourly-pill-divider"></span>');
+      }
+    } catch {
+      showFallback();
+    }
+  }
+
+  async function ipLocate() {
+    try {
+      const r = await fetch('https://ipwho.is/');
+      const j = await r.json();
+      if (!j.success) throw 0;
+      await fetchWeather(j.latitude, j.longitude, j.city || j.region || '本地');
+      return;
+    } catch {
+      showFallback();
+    }
+  }
+
+  function geoLocate() {
+    if (!('geolocation' in navigator)) { ipLocate(); return; }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => fetchWeather(pos.coords.latitude, pos.coords.longitude, '当前位置'),
+      () => ipLocate(),
+      { timeout: 4000, maximumAge: 60000 }
+    );
+  }
+
+  geoLocate();
+</script>

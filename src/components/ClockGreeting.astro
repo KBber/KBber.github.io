@@ -1,0 +1,48 @@
+---
+import SITE_CONFIG from '../../site.config';
+---
+
+<div class="clock-block">
+  <div class="hero-clock" id="hero-clock" aria-live="off">--:--:-- <span class="ampm"></span></div>
+  <p class="hero-tagline" id="hero-greeting">{SITE_CONFIG.brand.tagline}</p>
+  <div class="hero-meta">
+    <span class="liquid-glass-pill" id="hero-date">—</span>
+    <span class="liquid-glass-pill" id="hero-region">📍 {SITE_CONFIG.profile.location}</span>
+  </div>
+</div>
+
+<script>
+  const greetings = {
+    morning: '☀️ 早安',
+    noon: '🌤️ 午安',
+    afternoon: '🍵 午后好',
+    evening: '🌆 晚上好',
+    night: '🌙 夜深了',
+  };
+  const DATE_FMT = new Intl.DateTimeFormat('zh-CN', { dateStyle: 'long', weekday: 'long' });
+
+  function tick() {
+    const now = new Date();
+    const h24 = now.getHours();
+    const h12 = ((h24 + 11) % 12) + 1;
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    const ss = String(now.getSeconds()).padStart(2, '0');
+    const ampm = h24 < 12 ? 'AM' : 'PM';
+    const clockEl = document.getElementById('hero-clock');
+    if (clockEl) {
+      clockEl.innerHTML = `${String(h12).padStart(2,'0')}:${mm}:${ss} <span class="ampm">${ampm}</span>`;
+    }
+    const dateEl = document.getElementById('hero-date');
+    if (dateEl) dateEl.textContent = DATE_FMT.format(now);
+
+    let g = greetings.night;
+    if (h24 >= 5 && h24 < 12) g = greetings.morning;
+    else if (h24 === 12) g = greetings.noon;
+    else if (h24 > 12 && h24 < 18) g = greetings.afternoon;
+    else if (h24 >= 18 && h24 < 23) g = greetings.evening;
+    const greetEl = document.getElementById('hero-greeting');
+    if (greetEl) greetEl.textContent = g;
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>

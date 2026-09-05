@@ -1,0 +1,61 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SITE_CONFIG from '../../site.config';
+
+const timeline = [
+  { year: '2025', text: '开始把零散项目搬到博客上，重构个人主页。' },
+  { year: '2024', text: '折腾了一些边缘 AI / NER 项目，发表到 GitHub。' },
+  { year: '2023', text: '接触 Astro / Next.js，把静态博客当作游乐场。' },
+  { year: '2022', text: '进入大学，开始系统地写代码、做课程项目。' },
+];
+
+const interests = ['代码', '摄影', '阅读', '写作', '折腾工具'];
+---
+
+<BaseLayout title="关于" description={`About ${SITE_CONFIG.profile.displayName}`} activeNav="/about">
+  <section class="hero" style="padding-top: 24px;">
+    <div class="hero-card liquid-glass" style="display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center;">
+      <img
+        src={SITE_CONFIG.profile.avatar}
+        alt={SITE_CONFIG.profile.displayName}
+        style="width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 2px solid var(--glass-border);"
+      />
+      <div>
+        <h1 class="hero-greeting" style="font-size: 32px;">{SITE_CONFIG.profile.displayName}</h1>
+        <p class="hero-tagline">
+          {SITE_CONFIG.profile.role} · 📍 {SITE_CONFIG.profile.location}
+        </p>
+        <p style="margin-top: 10px; color: var(--ink-2);">{SITE_CONFIG.brand.bio}</p>
+      </div>
+    </div>
+
+    <section>
+      <h2 class="section-title">时间线</h2>
+      <div class="liquid-glass" style="padding: 22px 26px;">
+        <ul class="timeline" style="margin: 0; padding-left: 28px; list-style: none;">
+          {timeline.map((t) => (
+            <li class="timeline-item">
+              <time>{t.year}</time>
+              <p>{t.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">兴趣</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        {interests.map((i) => <span class="liquid-glass-pill">{i}</span>)}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">联系方式</h2>
+      <div class="liquid-glass" style="padding: 22px 26px;">
+        <p>GitHub：<a href={SITE_CONFIG.social.github}>{SITE_CONFIG.profile.github}</a></p>
+        <p style="margin-top: 6px;">Email：<a href={SITE_CONFIG.social.email}>{SITE_CONFIG.profile.email}</a></p>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

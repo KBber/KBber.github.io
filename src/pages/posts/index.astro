@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+---
+
+<BaseLayout title="文章" description="All posts" activeNav="/posts">
+  <section class="hero" style="padding-top: 24px;">
+    <h1 class="hero-greeting" style="font-size: 32px;">文章</h1>
+    <p class="hero-tagline">{posts.length} 篇沉淀 — 关于代码、笔记和偶尔的折腾。</p>
+    <div class="card-grid">
+      {posts.map((p) => (
+        <a class="entry-card liquid-glass" href={`/posts/${p.id}/`}>
+          <div class="meta">
+            <time datetime={p.data.pubDate.toISOString()}>
+              {p.data.pubDate.toLocaleDateString('zh-CN')}
+            </time>
+            {p.data.tags.map((t) => <span class="tag">{t}</span>)}
+          </div>
+          <h3>{p.data.title}</h3>
+          <p class="summary">{p.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

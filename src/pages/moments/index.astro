@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const moments = (await getCollection('moments'))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+---
+
+<BaseLayout title="随笔" description="Short thoughts and moments" activeNav="/moments">
+  <section class="hero" style="padding-top: 24px;">
+    <h1 class="hero-greeting" style="font-size: 32px;">随笔</h1>
+    <p class="hero-tagline">把碎片时间留给一句话。</p>
+    <div class="liquid-glass" style="padding: 24px 28px;">
+      <ul class="timeline" style="margin: 0; padding-left: 28px; list-style: none;">
+        {moments.map((m) => (
+          <li class="timeline-item">
+            <time datetime={m.data.pubDate.toISOString()}>
+              {m.data.pubDate.toLocaleDateString('zh-CN')}
+              {m.data.mood && ` · ${m.data.mood}`}
+              {m.data.location && ` · 📍 ${m.data.location}`}
+            </time>
+            <p style="white-space: pre-wrap;">{m.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

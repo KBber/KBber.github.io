@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Lightbox from '@components/Lightbox';
+
+export async function getStaticPaths() {
+  const albums = await getCollection('albums');
+  return albums.map((album) => ({
+    params: { slug: album.id },
+    props: { album },
+  }));
+}
+
+const { album } = Astro.props;
+---
+
+<BaseLayout title={album.data.title} description={album.data.description} activeNav="/albums">
+  <section class="hero" style="padding-top: 24px;">
+    <p style="font-size: 13px; color: var(--muted);">
+      <a href="/albums">← 相册</a>
+    </p>
+    <h1 class="hero-greeting" style="font-size: 32px;">{album.data.title}</h1>
+    {album.data.description && <p class="hero-tagline">{album.data.description}</p>}
+    <Lightbox photos={album.data.photos} client:load />
+  </section>
+</BaseLayout>

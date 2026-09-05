@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const albums = (await getCollection('albums'))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+---
+
+<BaseLayout title="相册" description="Photo albums" activeNav="/albums">
+  <section class="hero" style="padding-top: 24px;">
+    <h1 class="hero-greeting" style="font-size: 32px;">相册</h1>
+    <p class="hero-tagline">镜头捕捉到的一些瞬间。</p>
+    <div class="card-grid">
+      {albums.map((a) => (
+        <a class="entry-card liquid-glass" href={`/albums/${a.id}/`}>
+          <div style="aspect-ratio: 16/10; border-radius: 12px; overflow: hidden; background: var(--bg-2);">
+            {a.data.cover && <img src={a.data.cover} alt={a.data.title} style="width:100%;height:100%;object-fit:cover;" />}
+          </div>
+          <h3>{a.data.title}</h3>
+          {a.data.description && <p class="summary">{a.data.description}</p>}
+          <div class="meta" style="margin-top: auto;">
+            <time datetime={a.data.pubDate.toISOString()}>
+              {a.data.pubDate.toLocaleDateString('zh-CN')}
+            </time>
+            <span class="tag">{a.data.photos.length} 张</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

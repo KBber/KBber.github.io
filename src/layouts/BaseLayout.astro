@@ -1,0 +1,92 @@
+---
+import '@styles/global.css';
+import SITE_CONFIG from '../../site.config';
+import Navbar from '@components/Navbar.astro';
+import Footer from '@components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  activeNav?: string;
+}
+
+const {
+  title,
+  description = SITE_CONFIG.seo.description,
+  ogImage = SITE_CONFIG.seo.ogImage,
+  activeNav,
+} = Astro.props;
+
+const fullTitle = title
+  ? SITE_CONFIG.seo.titleTemplate.replace('%s', title)
+  : `${SITE_CONFIG.brand.name} · ${SITE_CONFIG.brand.tagline}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE_CONFIG.profile.avatar).toString();
+---
+
+<!doctype html>
+<html lang={SITE_CONFIG.seo.lang} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE_CONFIG.profile.displayName} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0b0e16" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3f5fa" media="(prefers-color-scheme: light)" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+    <meta property="og:url" content={canonicalURL} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{fullTitle}</title>
+
+    <script is:inline>
+      // Theme bootstrap — runs before paint to avoid FOUC
+      (function () {
+        try {
+          var saved = localStorage.getItem('kbber-theme');
+          var sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          var light = saved === 'light' || (!saved && sysLight);
+          if (light) document.documentElement.classList.add('light-mode');
+          document.documentElement.dataset.themeReady = '1';
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <Navbar active={activeNav} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    padding: 8px 14px;
+    background: var(--accent);
+    color: white;
+    border-radius: 8px;
+    z-index: 1000;
+  }
+  .skip-link:focus { left: 12px; top: 12px; }
+</style>

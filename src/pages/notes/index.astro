@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const notes = (await getCollection('notes'))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+
+const grouped: Record<string, typeof notes> = {};
+notes.forEach((n) => {
+  const t = n.data.topic;
+  grouped[t] = grouped[t] || [];
+  grouped[t].push(n);
+});
+const topics = Object.keys(grouped).sort();
+---
+
+<BaseLayout title="笔记" description="Notes by topic" activeNav="/notes">
+  <section class="hero" style="padding-top: 24px;">
+    <h1 class="hero-greeting" style="font-size: 32px;">笔记</h1>
+    <p class="hero-tagline">按主题分组的速记 — 学过的东西总该留下痕迹。</p>
+
+    {topics.map((topic) => (
+      <section>
+        <h2 class="section-title">{topic}</h2>
+        <div class="card-grid">
+          {grouped[topic].map((n) => (
+            <a class="entry-card liquid-glass" href={`/notes/${n.id}/`}>
+              <div class="meta">
+                <time datetime={n.data.pubDate.toISOString()}>
+                  {n.data.pubDate.toLocaleDateString('zh-CN')}
+                </time>
+              </div>
+              <h3>{n.data.title}</h3>
+              <p class="summary">{n.data.description}</p>
+              {n.data.tags.length > 0 && (
+                <div class="tags">
+                  {n.data.tags.map((t) => <span class="tag">{t}</span>)}
+                </div>
+              )}
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </section>
+</BaseLayout>
