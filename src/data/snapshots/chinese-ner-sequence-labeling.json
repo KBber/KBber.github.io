@@ -1,0 +1,61 @@
+{
+  "repo": {
+    "id": 1341513885,
+    "name": "chinese-ner-sequence-labeling",
+    "slug": "chinese-ner-sequence-labeling",
+    "description": "Chinese Named Entity Recognition - a four-paradigm sequence labeling study (BERT+Linear, BERT+CRF, LLM API, LLM SFT-LoRA)",
+    "html_url": "https://github.com/KBber/chinese-ner-sequence-labeling",
+    "default_branch": "main",
+    "language": "Python",
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "pushed_at": "2026-08-21T07:13:36Z",
+    "updated_at": "2026-08-21T07:15:02Z",
+    "fork": false,
+    "archived": false,
+    "has_pages": false,
+    "has_actions": false,
+    "topics": []
+  },
+  "commits": [
+    {
+      "sha": "61ac25d8221e937ea50288e29a0d034f54206f65",
+      "short_sha": "61ac25d",
+      "message": "Restructure project layout: docs/, src/llm/, polished README & LICENSE",
+      "author": {
+        "name": "KBber",
+        "email": "kbber@example.com"
+      },
+      "date": "2026-08-21T07:02:42Z",
+      "html_url": "https://github.com/KBber/chinese-ner-sequence-labeling/commit/61ac25d8221e937ea50288e29a0d034f54206f65"
+    },
+    {
+      "sha": "799f8b99fc80d22561d03aab622772572e6cd9e9",
+      "short_sha": "799f8b9",
+      "message": "Initial commit: 中文命名实体识别(NER)序列标注项目",
+      "author": {
+        "name": "KBber",
+        "email": "kbber@example.com"
+      },
+      "date": "2026-08-21T07:01:44Z",
+      "html_url": "https://github.com/KBber/chinese-ner-sequence-labeling/commit/799f8b99fc80d22561d03aab622772572e6cd9e9"
+    }
+  ],
+  "branches": [
+    {
+      "name": "main",
+      "protected": false
+    }
+  ],
+  "issues": [],
+  "actions": [],
+  "contributors": [],
+  "languages": {
+    "Python": 115151,
+    "Jinja": 328
+  },
+  "releases": [],
+  "snapshot_at": "2026-09-25T13:02:52Z"
+}
