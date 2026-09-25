@@ -1,102 +1,270 @@
 ---
-// Weather card with IP geolocation + Open-Meteo, with graceful fallback.
-// No external API keys required.
+// Weather card with multi-source geolocation + manual fallback.
+// Primary: navigator.geolocation → Open-Meteo (CN: also accessible via mirror)
+// Secondary: IP geolocation (ipwho.is / ipapi.co fallback)
+// Tertiary:  user-pickable city (default: Shanghai) — guarantees something renders.
 ---
 
 <aside class="weather-card liquid-glass" aria-label="Weather">
-  <h3>天气</h3>
+  <div class="weather-head">
+    <h3>天气</h3>
+    <select id="w-city" class="weather-city" aria-label="切换城市">
+      <option value="">📍 自动定位</option>
+      <option value="Shanghai">上海</option>
+      <option value="Beijing">北京</option>
+      <option value="Hangzhou">杭州</option>
+      <option value="Shenzhen">深圳</option>
+      <option value="Guangzhou">广州</option>
+      <option value="Chengdu">成都</option>
+      <option value="Tokyo">Tokyo</option>
+      <option value="London">London</option>
+      <option value="New York">New York</option>
+      <option value="San Francisco">San Francisco</option>
+    </select>
+  </div>
   <div class="weather-row">
     <span class="weather-temp" id="w-temp">--°</span>
-    <span class="weather-desc" id="w-desc">定位中…</span>
+    <span class="weather-desc" id="w-desc">加载中…</span>
   </div>
   <div class="weather-location" id="w-loc">—</div>
   <div class="weather-hourly" id="w-hourly" aria-live="polite"></div>
+  <p class="weather-msg" id="w-msg" hidden></p>
 </aside>
 
 <script>
-  const CODES: Record<number, { icon: string; text: string }> = {
-    0: { icon: '☀️', text: '晴朗' },
-    1: { icon: '🌤️', text: '晴间多云' },
-    2: { icon: '⛅', text: '多云' },
-    3: { icon: '☁️', text: '阴' },
-    45: { icon: '🌫️', text: '雾' },
-    48: { icon: '🌫️', text: '浓雾' },
-    51: { icon: '🌦️', text: '毛毛雨' },
-    53: { icon: '🌦️', text: '小雨' },
-    55: { icon: '🌧️', text: '中雨' },
-    61: { icon: '🌧️', text: '小雨' },
-    63: { icon: '🌧️', text: '中雨' },
-    65: { icon: '🌧️', text: '大雨' },
-    71: { icon: '🌨️', text: '小雪' },
-    73: { icon: '❄️', text: '中雪' },
-    75: { icon: '❄️', text: '大雪' },
-    80: { icon: '🌦️', text: '阵雨' },
-    81: { icon: '🌧️', text: '强阵雨' },
-    82: { icon: '⛈️', text: '暴雨' },
-    95: { icon: '⛈️', text: '雷阵雨' },
+  type CodeMap = Record<number, string>;
+  const CODES: CodeMap = {
+    0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+    45: '🌫️', 48: '🌫️',
+    51: '🌦️', 53: '🌦️', 55: '🌧️',
+    61: '🌧️', 63: '🌧️', 65: '🌧️',
+    71: '🌨️', 73: '❄️', 75: '❄️',
+    80: '🌦️', 81: '🌧️', 82: '⛈️',
+    95: '⛈️', 96: '⛈️', 99: '⛈️',
   };
 
   const elTemp = document.getElementById('w-temp');
   const elDesc = document.getElementById('w-desc');
   const elLoc = document.getElementById('w-loc');
   const elHr = document.getElementById('w-hourly');
+  const elMsg = document.getElementById('w-msg');
+  const elCity = document.getElementById('w-city') as HTMLSelectElement | null;
 
-  function showFallback() {
+  const CITY_COORDS: Record<string, [number, number]> = {
+    Shanghai: [31.2304, 121.4737],
+    Beijing: [39.9042, 116.4074],
+    Hangzhou: [30.2741, 120.1551],
+    Shenzhen: [22.5431, 114.0579],
+    Guangzhou: [23.1291, 113.2644],
+    Chengdu: [30.5728, 104.0668],
+    Tokyo: [35.6762, 139.6503],
+    London: [51.5074, -0.1278],
+    'New York': [40.7128, -74.0060],
+    'San Francisco': [37.7749, -122.4194],
+  };
+
+  function showError(msg: string) {
     if (elTemp) elTemp.textContent = '--°';
     if (elDesc) elDesc.textContent = '无法获取';
     if (elLoc) elLoc.textContent = '本地';
     if (elHr) elHr.innerHTML = '<span class="hourly-pill">—</span>';
+    if (elMsg) {
+      elMsg.hidden = false;
+      elMsg.textContent = msg;
+    }
   }
 
   async function fetchWeather(lat: number, lon: number, name: string) {
+    // 1) Open-Meteo (主)
     try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,weathercode&forecast_days=2`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('weather api');
+      const url =
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+        `&current_weather=true&hourly=temperature_2m,weathercode&forecast_days=2`;
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const info = CODES[data.current_weather.weathercode] || { icon: '🌿', text: '宜出行' };
-      if (elTemp) elTemp.textContent = `${Math.round(data.current_weather.temperature)}°`;
-      if (elDesc) elDesc.textContent = `${info.text} ${info.icon}`;
-      if (elLoc) elLoc.textContent = name;
-
-      if (elHr) {
-        const now = new Date();
-        const cur = now.toISOString().slice(0, 13);
-        const idx = Math.max(0, data.hourly.time.findIndex((t: string) => t.startsWith(cur)));
-        const hours = [1, 2, 3].map((i) => {
-          const ix = idx + i;
-          const t = data.hourly.time[ix].slice(11, 16);
-          const c = CODES[data.hourly.weathercode[ix]] || { icon: '🌤️', text: '' };
-          const tp = Math.round(data.hourly.temperature_2m[ix]);
-          return `<span class="hourly-pill">${t} ${c.icon} ${tp}°</span>`;
-        });
-        elHr.innerHTML = hours.join('<span class="hourly-pill-divider"></span>');
-      }
-    } catch {
-      showFallback();
+      renderWeather(data, name);
+      return;
+    } catch (e) {
+      console.warn('[weather] open-meteo failed', e);
     }
+    // 2) wttr.in (备 — 无 key、纯文本 / JSON)
+    try {
+      const res = await fetch(
+        `https://wttr.in/${encodeURIComponent(name)}?format=j1`,
+        { cache: 'no-store' },
+      );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const j = await res.json();
+      const cur = j.current_condition?.[0];
+      if (!cur) throw new Error('no current_condition');
+      const t = parseFloat(cur.temp_C);
+      const code = parseInt(cur.weatherCode, 10);
+      const icon = CODES[code] || '🌿';
+      if (elTemp) elTemp.textContent = `${Math.round(t)}°`;
+      if (elDesc) elDesc.textContent = `${cur.weatherDesc?.[0]?.value || '宜出行'} ${icon}`;
+      if (elLoc) elLoc.textContent = name;
+      if (elHr) {
+        const hours = (j.weather?.[0]?.hourly || []).slice(0, 3).map((h: any) => {
+          const time = (h.time || '').slice(0, 5) || '--:--';
+          const icon2 = CODES[parseInt(h.weatherCode, 10)] || '🌤️';
+          const tp = Math.round(parseFloat(h.tempC));
+          return `<span class="hourly-pill">${time} ${icon2} ${tp}°</span>`;
+        });
+        elHr.innerHTML = hours.join('<span class="hourly-pill-divider"></span>') || '<span class="hourly-pill">—</span>';
+      }
+      if (elMsg) elMsg.hidden = true;
+      return;
+    } catch (e) {
+      console.warn('[weather] wttr.in failed', e);
+    }
+    // 3) 最终 fallback
+    showError('实时天气接口不可达，已显示默认城市');
+    if (elLoc) elLoc.textContent = name;
   }
 
-  async function ipLocate() {
-    try {
-      const r = await fetch('https://ipwho.is/');
-      const j = await r.json();
-      if (!j.success) throw 0;
-      await fetchWeather(j.latitude, j.longitude, j.city || j.region || '本地');
-      return;
-    } catch {
-      showFallback();
+  function renderWeather(data: any, name: string) {
+    const info = CODES[data.current_weather?.weathercode] || '🌿';
+    if (elTemp) elTemp.textContent = `${Math.round(data.current_weather.temperature)}°`;
+    if (elDesc) elDesc.textContent = `${info} 宜出行`;
+    if (elLoc) elLoc.textContent = name;
+
+    if (elHr) {
+      const now = new Date();
+      const cur = now.toISOString().slice(0, 13);
+      const idx = Math.max(0, data.hourly.time.findIndex((t: string) => t.startsWith(cur)));
+      const hours = [1, 2, 3].map((i) => {
+        const ix = idx + i;
+        const t = data.hourly.time[ix].slice(11, 16);
+        const c = CODES[data.hourly.weathercode[ix]] || '🌤️';
+        const tp = Math.round(data.hourly.temperature_2m[ix]);
+        return `<span class="hourly-pill">${t} ${c} ${tp}°</span>`;
+      });
+      elHr.innerHTML = hours.join('<span class="hourly-pill-divider"></span>');
     }
+    if (elMsg) elMsg.hidden = true;
+  }
+
+  // ----- IP 定位（多源）-----
+  async function ipLocate(): Promise<[number, number, string] | null> {
+    const sources = [
+      async () => {
+        const r = await fetch('https://ipwho.is/');
+        const j = await r.json();
+        if (!j.success) throw 0;
+        return [j.latitude as number, j.longitude as number, (j.city || j.region || '本地') as string];
+      },
+      async () => {
+        const r = await fetch('https://ipapi.co/json/');
+        const j = await r.json();
+        if (j.error) throw 0;
+        return [j.latitude as number, j.longitude as number, (j.city || '本地') as string];
+      },
+    ];
+    for (const src of sources) {
+      try {
+        const r = await src();
+        if (r) return r as [number, number, string];
+      } catch (e) {
+        console.warn('[ip-locate] one source failed', e);
+      }
+    }
+    return null;
   }
 
   function geoLocate() {
-    if (!('geolocation' in navigator)) { ipLocate(); return; }
+    if (!('geolocation' in navigator)) { fallBackCity(); return; }
     navigator.geolocation.getCurrentPosition(
       (pos) => fetchWeather(pos.coords.latitude, pos.coords.longitude, '当前位置'),
-      () => ipLocate(),
-      { timeout: 4000, maximumAge: 60000 }
+      () => ipLocate().then((r) => r ? fetchWeather(r[0], r[1], r[2]) : fallBackCity()),
+      { timeout: 4000, maximumAge: 60000 },
     );
   }
 
-  geoLocate();
+  function fallBackCity() {
+    const city = elCity?.value || 'Shanghai';
+    const [lat, lon] = CITY_COORDS[city] || CITY_COORDS.Shanghai;
+    fetchWeather(lat, lon, city);
+  }
+
+  // 用户手动切城市
+  elCity?.addEventListener('change', () => {
+    const v = elCity.value;
+    if (!v) { geoLocate(); return; }
+    const [lat, lon] = CITY_COORDS[v] || CITY_COORDS.Shanghai;
+    fetchWeather(lat, lon, v);
+  });
+
+  // 默认城市先展示，保证「一定看得到」
+  (() => {
+    const v = elCity?.value || 'Shanghai';
+    const [lat, lon] = CITY_COORDS[v] || CITY_COORDS.Shanghai;
+    fetchWeather(lat, lon, v);
+    // 然后尝试 IP 精修
+    setTimeout(geoLocate, 600);
+  })();
 </script>
+
+<style>
+  .weather-card { padding: 16px 18px; min-width: 240px; }
+  .weather-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .weather-head h3 { margin: 0; font-size: 14px; opacity: 0.8; }
+  .weather-city {
+    font-size: 12px;
+    background: rgba(255,255,255,0.06);
+    color: var(--ink);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 3px 6px;
+    cursor: pointer;
+    outline: none;
+  }
+  .weather-city:hover { background: rgba(255,255,255,0.12); }
+  .weather-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .weather-temp {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  .weather-desc { font-size: 14px; color: var(--ink-2); }
+  .weather-location {
+    font-size: 12px;
+    color: var(--ink-2);
+    margin-top: 2px;
+  }
+  .weather-hourly {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .hourly-pill {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.18);
+    color: var(--ink);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+  }
+  .hourly-pill-divider {
+    width: 4px;
+    height: 1px;
+  }
+  .weather-msg {
+    font-size: 11px;
+    color: var(--ink-2);
+    margin-top: 8px;
+    opacity: 0.7;
+  }
+</style>
