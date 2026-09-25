@@ -1,0 +1,320 @@
+{
+  "repo": {
+    "id": 593459830,
+    "name": "KBber.github.io",
+    "slug": "KBber.github.io",
+    "description": null,
+    "html_url": "https://github.com/KBber/KBber.github.io",
+    "default_branch": "main",
+    "language": "Astro",
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "pushed_at": "2026-09-25T12:31:15Z",
+    "updated_at": "2026-09-25T12:31:19Z",
+    "fork": false,
+    "archived": false,
+    "has_pages": true,
+    "has_actions": true,
+    "topics": []
+  },
+  "commits": [
+    {
+      "sha": "b3f476cb8e8a33a1a6707905697a9bbcdf7d2750",
+      "short_sha": "b3f476c",
+      "message": "fix(weather): multi-source (open-meteo → wttr.in) + manual city fallback",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-25T12:31:14Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/b3f476cb8e8a33a1a6707905697a9bbcdf7d2750"
+    },
+    {
+      "sha": "f1ec2ee8e18e4c23b6a898e359d46029130256da",
+      "short_sha": "f1ec2ee",
+      "message": "fix(homepage): escape apostrophe in projects.astro that broke build",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-25T12:26:25Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/f1ec2ee8e18e4c23b6a898e359d46029130256da"
+    },
+    {
+      "sha": "7fafe75b5644ca5b5732a7d89c3330353edae325",
+      "short_sha": "7fafe75",
+      "message": "refactor(homepage): projects.astro — AI engineer focus",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-25T11:59:58Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/7fafe75b5644ca5b5732a7d89c3330353edae325"
+    },
+    {
+      "sha": "802c8d5edfba2b39346d58371dad1a36e6767564",
+      "short_sha": "802c8d5",
+      "message": "refactor(homepage): about.astro — AI engineer focus",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-25T11:59:57Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/802c8d5edfba2b39346d58371dad1a36e6767564"
+    },
+    {
+      "sha": "7e07ec200f1b80411d4bb821cfcd23096b96ccc4",
+      "short_sha": "7e07ec2",
+      "message": "refactor(homepage): index.astro — AI engineer focus",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-25T11:59:56Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/7e07ec200f1b80411d4bb821cfcd23096b96ccc4"
+    },
+    {
+      "sha": "18a62313e665d9845c5962bb78c2cbb952de89a6",
+      "short_sha": "18a6231",
+      "message": "refactor(homepage): site.config.ts — AI engineer focus",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-25T11:59:54Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/18a62313e665d9845c5962bb78c2cbb952de89a6"
+    },
+    {
+      "sha": "cbbb97b778a371886f62369ebe4f411136aef640",
+      "short_sha": "cbbb97b",
+      "message": "refactor(homepage): site.config.ts — AI engineer focus",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-25T11:59:31Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/cbbb97b778a371886f62369ebe4f411136aef640"
+    },
+    {
+      "sha": "b616d37557a26f2f97a22bc97251ba43350d2c6f",
+      "short_sha": "b616d37",
+      "message": "feat: add forward-zoom Galaxy canvas background to home\n\n- New Galaxy.tsx React component: Canvas-based 3-layer starfield\n  (far/mid/near), 470 stars total, perspective projection\n- Recursive z-depth: stars spawn at z=1 (far) and approach z=0\n  (near), recycle on pass — simulates flying through space\n- Color palette includes white dwarfs, blue, yellow, orange giants\n- Soft radial nebula glow (purple/blue) at center\n- Glow halos when stars get close to camera\n- Mouse parallax (3 layers at different strength) + deviceorientation\n- Honors prefers-reduced-motion (static frame, no animation)\n- Vignette + subtle radial darkening at edges\n- Only loaded on home page (client:only='react'), no global JS cost\n- Total bundle: 3.3 KB raw / ~1.4 KB gzip",
+      "author": {
+        "name": "KBber",
+        "email": "kbber@example.com"
+      },
+      "date": "2026-09-05T04:07:49Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/b616d37557a26f2f97a22bc97251ba43350d2c6f"
+    },
+    {
+      "sha": "3f2e8fb8672d126820b7fe29a8f2a6b45d64c725",
+      "short_sha": "3f2e8fb",
+      "message": "feat: rebuild blog with Astro + React (Liquid Glass, dark/light, content collections)\n\n- Astro 5 + React 19 + TypeScript\n- Liquid glass navbar with backdrop-filter, dark/light theme toggle\n- Live clock + greeting + IP-based weather (Open-Meteo, no key needed)\n- Draggable magnetic cards (vanilla pointer events)\n- Pages: Home, Posts, Albums, Moments, Notes, About\n- Content collections (Markdown + JSON)\n- Lightbox photo viewer, reading progress bar\n- RSS + sitemap\n- GitHub Actions auto-deploy to gh-pages",
+      "author": {
+        "name": "KBber",
+        "email": "kbber@example.com"
+      },
+      "date": "2026-09-05T03:58:01Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/3f2e8fb8672d126820b7fe29a8f2a6b45d64c725"
+    },
+    {
+      "sha": "abce84e12b6f578e21d0ab81c35879f5a80dfd17",
+      "short_sha": "abce84e",
+      "message": "Add chinese-ner-sequence-labeling project to homepage",
+      "author": {
+        "name": "DingTian Xue",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-21T07:21:17Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/abce84e12b6f578e21d0ab81c35879f5a80dfd17"
+    },
+    {
+      "sha": "548c3222ab095c2e5c3f99ea89d1249009d20b5f",
+      "short_sha": "548c322",
+      "message": "Drop background images (3.png atmosphere, grain noise) — only brick wall remains",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-20T08:00:48Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/548c3222ab095c2e5c3f99ea89d1249009d20b5f"
+    },
+    {
+      "sha": "2f07e84b0b589ee69cfb446dd8f3ec45d4becd1d",
+      "short_sha": "2f07e84",
+      "message": "Tighten perf-remarks comments",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-20T07:35:31Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/2f07e84b0b589ee69cfb446dd8f3ec45d4becd1d"
+    },
+    {
+      "sha": "b9704fa5c610f02003ac1becfd76113208a7f96d",
+      "short_sha": "b9704fa",
+      "message": "Perf: drop backdrop-filter, mix-blend-mode, animated filters, glow/aurora layers to fix lag",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-20T07:28:59Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/b9704fa5c610f02003ac1becfd76113208a7f96d"
+    },
+    {
+      "sha": "c3a87a467ec91fa7f766ccf1624d4bc23b187350",
+      "short_sha": "c3a87a4",
+      "message": "Add News & Publications sections, emoji section icons, redact contact info (phone/city), mask email",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-18T13:07:34Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/c3a87a467ec91fa7f766ccf1624d4bc23b187350"
+    },
+    {
+      "sha": "945e974bd6979d70141f9b24fa0872a2252adf3b",
+      "short_sha": "945e974",
+      "message": "Remove scan-beam layer and slow all gradient animations (~2x)",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-18T12:57:20Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/945e974bd6979d70141f9b24fa0872a2252adf3b"
+    },
+    {
+      "sha": "0f50fb9ea1ad70e0704c4c7937a82e8be3074f99",
+      "short_sha": "0f50fb9",
+      "message": "Background: add aurora ribbons + scan beam + film grain for richer depth",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-18T12:51:41Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/0f50fb9ea1ad70e0704c4c7937a82e8be3074f99"
+    },
+    {
+      "sha": "34b941b87aab9063a156a624b4a443ee339c9db1",
+      "short_sha": "34b941b",
+      "message": "Fix bricks.svg: write as UTF-8 (no BOM) so SVG <animate> renders correctly",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-18T12:36:49Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/34b941b87aab9063a156a624b4a443ee339c9db1"
+    },
+    {
+      "sha": "d92317695aa95014fada4b3cb3635d984612b201",
+      "short_sha": "d923176",
+      "message": "Bricks: strict 80x80 squares with chessboard opacity animation (neighbouring shift)",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-18T12:34:52Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/d92317695aa95014fada4b3cb3635d984612b201"
+    },
+    {
+      "sha": "47652cb1d3843645b8fdeb5ab5adb2ad8913ae0a",
+      "short_sha": "47652cb",
+      "message": "Theme: switch to premium grey palette based on 3.png with breathing brick wall",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-18T12:27:34Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/47652cb1d3843645b8fdeb5ab5adb2ad8913ae0a"
+    },
+    {
+      "sha": "93ba1cde96c8bd18b8f611eed76bab53a19dff70",
+      "short_sha": "93ba1cd",
+      "message": "Background: use 2.jpg MTR-red with continuous breathing gradient animation",
+      "author": {
+        "name": "KBber",
+        "email": "zhongliwansui@outlook.com"
+      },
+      "date": "2026-08-18T12:19:12Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/commit/93ba1cde96c8bd18b8f611eed76bab53a19dff70"
+    }
+  ],
+  "branches": [
+    {
+      "name": "main",
+      "protected": false
+    }
+  ],
+  "issues": [],
+  "actions": [
+    {
+      "id": 36135392810,
+      "name": "Deploy KBber Blog to GitHub Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "branch": "main",
+      "created_at": "2026-09-25T12:31:17Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/actions/runs/36135392810"
+    },
+    {
+      "id": 36134929508,
+      "name": "Deploy KBber Blog to GitHub Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "branch": "main",
+      "created_at": "2026-09-25T12:26:27Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/actions/runs/36134929508"
+    },
+    {
+      "id": 36132442612,
+      "name": "Deploy KBber Blog to GitHub Pages",
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "push",
+      "branch": "main",
+      "created_at": "2026-09-25T12:00:00Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/actions/runs/36132442612"
+    },
+    {
+      "id": 36132440526,
+      "name": "Deploy KBber Blog to GitHub Pages",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "event": "push",
+      "branch": "main",
+      "created_at": "2026-09-25T11:59:59Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/actions/runs/36132440526"
+    },
+    {
+      "id": 36132438736,
+      "name": "Deploy KBber Blog to GitHub Pages",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "event": "push",
+      "branch": "main",
+      "created_at": "2026-09-25T11:59:58Z",
+      "html_url": "https://github.com/KBber/KBber.github.io/actions/runs/36132438736"
+    }
+  ],
+  "contributors": [
+    {
+      "login": "KBber",
+      "name": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/116370811?v=4",
+      "contributions": 49
+    }
+  ],
+  "languages": {
+    "Astro": 50346,
+    "HTML": 24644,
+    "TypeScript": 18484,
+    "CSS": 17327,
+    "JavaScript": 1100
+  },
+  "releases": [],
+  "snapshot_at": "2026-09-25T13:02:34Z"
+}
