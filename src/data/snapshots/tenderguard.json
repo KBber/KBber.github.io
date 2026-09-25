@@ -1,0 +1,100 @@
+{
+  "repo": {
+    "id": 1381015710,
+    "name": "tenderguard",
+    "slug": "tenderguard",
+    "description": "Evidence-Grounded, Rule-Governed Tender Compliance System (v0.3)",
+    "html_url": "https://github.com/KBber/tenderguard",
+    "default_branch": "main",
+    "language": "Python",
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "pushed_at": "2026-09-23T08:36:44Z",
+    "updated_at": "2026-09-23T08:36:48Z",
+    "fork": false,
+    "archived": false,
+    "has_pages": false,
+    "has_actions": false,
+    "topics": []
+  },
+  "commits": [
+    {
+      "sha": "30fd1345b5a52214f4989738a2c40c9bd753cba7",
+      "short_sha": "30fd134",
+      "message": "TenderGuard v0.3 publish snapshot\n\n- README resync to v0.3 (review_type 6-value taxonomy, Evidence\n  Quality 5-level, Failure Taxonomy 10-class, AtomicRequirement,\n  hard-rule whitelist). Previous README was still v0.1 wording.\n- Re-mirror source: refresh code / prompts / config / evaluation\n  from the local workspace.\n- Exclude tests/, data/source/, data/normalized/, and PDF samples\n  from the public blob (sensitive data + tests stay in the\n  workspace, not the published snapshot).\n- .gitignore declares the same exclusions so any future force-push\n  stays consistent.\n\nBug fix: this commit drops the spurious base64 round-trip. The\nGit Data API stores `content` as the literal bytes of the blob\nwith no decoding layer — encoding=base64 in the tree entry is\nsilently ignored, so the previous commits ended up with base64\nASCII sitting in place of every text file. This commit uploads\nraw UTF-8 bytes.",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-23T08:36:43Z",
+      "html_url": "https://github.com/KBber/tenderguard/commit/30fd1345b5a52214f4989738a2c40c9bd753cba7"
+    },
+    {
+      "sha": "8ffa23e922493b6beab9f525d9683c3124accc38",
+      "short_sha": "8ffa23e",
+      "message": "TenderGuard v0.3 publish snapshot\n\n- README resync to v0.3 (review_type 6-value taxonomy, Evidence\n  Quality 5-level, Failure Taxonomy 10-class, AtomicRequirement,\n  hard-rule whitelist). Previous README was still v0.1 wording.\n- Re-mirror source: refresh code / prompts / config / evaluation\n  from the local workspace.\n- Exclude tests/ and data/source/ from the public blob\n  (per repo policy: sensitive data + tests live in the workspace,\n  not the published snapshot).\n- .gitignore declares the same exclusions so any future force-push\n  stays consistent.\n\nEvery blob carries encoding=base64 so GitHub decodes the text\nfiles correctly (fix for the previous base64-as-ASCII bug).",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-23T08:34:30Z",
+      "html_url": "https://github.com/KBber/tenderguard/commit/8ffa23e922493b6beab9f525d9683c3124accc38"
+    },
+    {
+      "sha": "cdb260d43186d173d194d3e2621580f8026eef7e",
+      "short_sha": "cdb260d",
+      "message": "Fix: declare encoding=base64 on every blob\n\nPrevious commit stored base64 strings AS-IS, so every text file\non GitHub rendered as base64 garbage. This commit re-uploads\nall files with encoding=base64 so GitHub decodes them.\n\nNo content changes; same TenderGuard v0.3 source.",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-22T07:17:04Z",
+      "html_url": "https://github.com/KBber/tenderguard/commit/cdb260d43186d173d194d3e2621580f8026eef7e"
+    },
+    {
+      "sha": "6776d69364d43ebe0bc3fdae7eedd01da25f16fb",
+      "short_sha": "6776d69",
+      "message": "Initial commit: TenderGuard v0.3\n\nEvidence-Grounded, Rule-Governed Tender Compliance System.\n\n- 6-layer pipeline (INGEST/EXTRACT/RETRIEVE/VERIFY/REPORT)\n- 17 Rule operators + hard-rule whitelist (Rule Engine > LLM)\n- 5-tier Evidence Quality + 10-class ReviewReason\n- 61 direct-tender CK from Excel with 6 review_type classification\n- True multi-page table extraction (5-state machine)\n- 17 + 14 regression tests + 60-case evaluation harness\n- HTML dashboard with SVG metrics + ASCII state-machine diagrams\n\nPrivacy: no real tender PDFs or CK Excel shipped; synth generator included; .gitignore blocks accidental commits of data/source/, *.pdf, output/",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-22T07:06:32Z",
+      "html_url": "https://github.com/KBber/tenderguard/commit/6776d69364d43ebe0bc3fdae7eedd01da25f16fb"
+    },
+    {
+      "sha": "e8a51d6e102e19fbca3b7a7d8f8c0c334b700ce2",
+      "short_sha": "e8a51d6",
+      "message": "Initial commit",
+      "author": {
+        "name": "KBber",
+        "email": "116370811+kbber@users.noreply.github.com"
+      },
+      "date": "2026-09-22T06:59:59Z",
+      "html_url": "https://github.com/KBber/tenderguard/commit/e8a51d6e102e19fbca3b7a7d8f8c0c334b700ce2"
+    }
+  ],
+  "branches": [
+    {
+      "name": "main",
+      "protected": false
+    }
+  ],
+  "issues": [],
+  "actions": [],
+  "contributors": [
+    {
+      "login": "KBber",
+      "name": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/116370811?v=4",
+      "contributions": 5
+    }
+  ],
+  "languages": {
+    "Python": 217453
+  },
+  "releases": [],
+  "snapshot_at": "2026-09-25T13:02:39Z"
+}
