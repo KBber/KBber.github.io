@@ -1,0 +1,71 @@
+{
+  "repo": {
+    "id": 1344461004,
+    "name": "pd-grpo",
+    "slug": "pd-grpo",
+    "description": "Nash Equilibrium emergence in Iterated Prisoners Dilemma via GRPO",
+    "html_url": "https://github.com/KBber/pd-grpo",
+    "default_branch": "main",
+    "language": "Python",
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "pushed_at": "2026-08-24T03:27:21Z",
+    "updated_at": "2026-08-24T03:27:26Z",
+    "fork": false,
+    "archived": false,
+    "has_pages": false,
+    "has_actions": false,
+    "topics": []
+  },
+  "commits": [
+    {
+      "sha": "aabb8c93847045907f6e31214957c0143e0a0636",
+      "short_sha": "aabb8c9",
+      "message": "docs: add academic English README with bilingual cross-links\n\n- Abstract-style summary of method and three principal findings\n- Formal setup section (agent config, reward table, opponent mixture, curriculum)\n- Results with memory-1 policy notation, all figures embedded\n- Discussion section attributing pure-strategy overshoot to reward topology\n- Engineering notes framed as reproducibility appendix\n- Limitations & references (Axelrod, DeepSeekMath/GRPO, Qwen2, LoRA, folk theorem)",
+      "author": {
+        "name": "KBber",
+        "email": "kbber@example.com"
+      },
+      "date": "2026-08-24T03:27:19Z",
+      "html_url": "https://github.com/KBber/pd-grpo/commit/aabb8c93847045907f6e31214957c0143e0a0636"
+    },
+    {
+      "sha": "e1d95069048538aca1376ee4b6025e95d3c3f83e",
+      "short_sha": "e1d9506",
+      "message": "docs: README with full experiment story and embedded figures\n\n- Embed all 5 result figures with per-figure interpretation\n- Add narrative arc: hypothesis -> baseline surprise -> training drama -> Nash collapse\n- Add payoff matrix, opponent roster, before/after comparison tables\n- Add verification checklist (3/5) with honest failure analysis\n- Add engineering pitfalls section (reward hacking, TRL compat, stateful opponents)",
+      "author": {
+        "name": "KBber",
+        "email": "kbber@example.com"
+      },
+      "date": "2026-08-24T03:19:12Z",
+      "html_url": "https://github.com/KBber/pd-grpo/commit/e1d95069048538aca1376ee4b6025e95d3c3f83e"
+    },
+    {
+      "sha": "a04a0e2255c180ec549f8a21b0f5236a4397f41a",
+      "short_sha": "a04a0e2",
+      "message": "feat: initial release of Nash-Grpo\n\nA research project on Nash Equilibrium emergence in Iterated Prisoner's\nDilemma via Group Relative Policy Optimization (GRPO).\n\nTrains Qwen2-0.5B-Instruct with LoRA to play IPD against 5 classical\nopponents (AllD/TFT/AllC/GrimTrigger/Random). After 300 GRPO steps,\nthe agent's policy converges from cooperative Tit-for-Tat-like behavior\nto a near-Nash pure Always-Defect strategy.\n\nKey result: pCC drops 0.98 -> 0.0, pDD rises 0.84 -> 0.97, with\nanti-over-cooperation reward specifically eliminating the LLM's\ndefault pDC=0.13 over-forgiveness bias.\n\nComponents:\n- Memory-1 stochastic policy pi_hat = (pCC, pCD, pDC, pDD) for quantification\n- 3 reward functions (payoff / format / anti_overcoop)\n- Curriculum with mixed episode lengths (5/20/50)\n- Full pipeline: probe_baseline -> train -> eval -> analyze -> visualize\n\nTested on RTX 3050 4GB (2.4GB peak), full 300-step training in ~35 min.",
+      "author": {
+        "name": "KBber",
+        "email": "kbber@example.com"
+      },
+      "date": "2026-08-24T02:58:30Z",
+      "html_url": "https://github.com/KBber/pd-grpo/commit/a04a0e2255c180ec549f8a21b0f5236a4397f41a"
+    }
+  ],
+  "branches": [
+    {
+      "name": "main",
+      "protected": false
+    }
+  ],
+  "issues": [],
+  "actions": [],
+  "contributors": [],
+  "languages": {
+    "Python": 72108
+  },
+  "releases": [],
+  "snapshot_at": "2026-09-25T13:02:49Z"
+}
