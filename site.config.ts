@@ -8,16 +8,16 @@ export const SITE_CONFIG = {
   /** Site identity */
   brand: {
     name: 'KBber',
-    tagline: 'Hello, here is KBber',
-    signature: "A small corner on the web — code, notes & quiet fragments.",
-    bio: '记录学习与生活的数字角落。代码、笔记、摄影与偶尔的随想。',
+    tagline: 'AI Engineer · Agents · LLMs · RL',
+    signature: 'Run the experiment. Trust the numbers. Ship the thing.',
+    bio: '围绕 Agent · LLM · 强化学习的工程作品集 — 把论文搬进能跑、可测、可上线的系统。',
   },
 
   /** Owner profile (used on Home and About) */
   profile: {
     displayName: 'KBber',
     realName: 'KBber',
-    role: 'Student · Developer',
+    role: 'AI Engineer',
     location: 'Earth',
     avatar: '/assets/2.jpg',
     email: 'kbber@example.com',
@@ -41,14 +41,15 @@ export const SITE_CONFIG = {
 
   /** Brand color tokens (CSS variables consumed by global.css) */
   theme: {
-    accent: '#3B82F6',        // blue
-    accentSoft: '#93C5FD',
-    accentDeep: '#1E40AF',
+    accent: '#06B6D4',        // cyan — agent / system
+    accentSoft: '#67E8F9',
+    accentDeep: '#0E7490',
   },
 
   /** Navigation order */
   nav: [
     { label: '首页', href: '/' },
+    { label: '项目', href: '/projects' },
     { label: '文章', href: '/posts' },
     { label: '相册', href: '/albums' },
     { label: '随笔', href: '/moments' },
@@ -67,7 +68,7 @@ export const SITE_CONFIG = {
   seo: {
     titleTemplate: '%s · KBber',
     description:
-      'KBber 的个人博客 — 记录学习、生活与代码。Articles, notes, moments and photos.',
+      'KBber 的个人主页 — AI Engineer，专注于 Agent 系统、LLM 应用工程（GraphRAG、Contextual RAG）与强化学习微调（GRPO / RLHF）。',
     ogImage: '/assets/2.jpg',
     lang: 'zh-CN',
   },
