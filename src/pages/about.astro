@@ -3,16 +3,55 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import SITE_CONFIG from '../../site.config';
 
 const timeline = [
-  { year: '2025', text: '开始把零散项目搬到博客上，重构个人主页。' },
-  { year: '2024', text: '折腾了一些边缘 AI / NER 项目，发表到 GitHub。' },
-  { year: '2023', text: '接触 Astro / Next.js，把静态博客当作游乐场。' },
-  { year: '2022', text: '进入大学，开始系统地写代码、做课程项目。' },
+  {
+    year: '2026 · Now',
+    text: '全职投入 TenderGuard v0.3：把 Rule Engine × LLM × Evidence Pipeline 做成可上线的投标合规 Agent。',
+    accent: '#06B6D4',
+  },
+  {
+    year: '2026 · Q1',
+    text: 'pd-grpo：用 GRPO 微调 0.5B 小模型，观察 Nash 均衡在 300 步内的涌现；记录工程翻车全过程。',
+    accent: '#7C3AED',
+  },
+  {
+    year: '2025',
+    text: 'GraphRAG-financial-report：在 Neo4j 上搭了 typed knowledge graph，对比 Local/Global Search 与向量 RAG 的问答能力。',
+    accent: '#0EA5E9',
+  },
+  {
+    year: '2025',
+    text: 'react-llm-memory-agent：把 ReAct 双实现（手写 Prompt vs Function Calling）+ 短期记忆 + 指代消解做到 36/36 测试通过。',
+    accent: '#22C55E',
+  },
+  {
+    year: '2024',
+    text: 'chinese-ner-sequence-labeling：四种范式（BERT+Linear / BERT+CRF / LLM API / LLM SFT-LoRA）的对比研究。',
+    accent: '#14B8A6',
+  },
+  {
+    year: '2023',
+    text: 'edgeai-trash-classifier：MobileNetV2 + Android 端侧部署的垃圾分类系统，毕业论文配套实现。',
+    accent: '#F59E0B',
+  },
+  {
+    year: '2022',
+    text: '进入大学，开始系统写代码、做课程项目；从此走上了「读论文 → 复现 → 写工程」的循环。',
+    accent: '#9CA3AF',
+  },
 ];
 
-const interests = ['代码', '摄影', '阅读', '写作', '折腾工具'];
+const stack = [
+  { group: 'Languages', items: ['Python', 'TypeScript', 'C++', 'Java', 'SQL'] },
+  { group: 'AI / ML', items: ['PyTorch', 'Transformers', 'LoRA', 'GRPO / RLHF', 'Pydantic v2'] },
+  { group: 'Agent Stack', items: ['ReAct', 'Function Calling', 'Tool Use', 'Memory Layer', 'Anaphora Resolution'] },
+  { group: 'RAG & KG', items: ['Neo4j', 'GraphRAG', 'FAISS', 'BM25', 'Leiden Community'] },
+  { group: 'Infra', items: ['Docker', 'Linux', 'GitHub Actions', 'FastAPI', 'Astro / React'] },
+];
+
+const interests = ['把论文变成系统', '规则引擎兜底 LLM', '可复现实验', '工程翻车记录', '中文 NLP'];
 ---
 
-<BaseLayout title="关于" description={`About ${SITE_CONFIG.profile.displayName}`} activeNav="/about">
+<BaseLayout title="关于" description={`About ${SITE_CONFIG.profile.displayName} — AI Engineer working on Agents, LLMs, and RL`} activeNav="/about">
   <section class="hero" style="padding-top: 24px;">
     <div class="hero-card liquid-glass" style="display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center;">
       <img
@@ -23,39 +62,96 @@ const interests = ['代码', '摄影', '阅读', '写作', '折腾工具'];
       <div>
         <h1 class="hero-greeting" style="font-size: 32px;">{SITE_CONFIG.profile.displayName}</h1>
         <p class="hero-tagline">
-          {SITE_CONFIG.profile.role} · 📍 {SITE_CONFIG.profile.location}
+          AI Engineer · 📍 {SITE_CONFIG.profile.location}
         </p>
-        <p style="margin-top: 10px; color: var(--ink-2);">{SITE_CONFIG.brand.bio}</p>
+        <p style="margin-top: 10px; color: var(--ink-2);">
+          做 <strong>Agent 系统</strong>、<strong>LLM 应用工程</strong> 与 <strong>强化学习微调</strong>。
+          偏好把论文搬进能跑的系统：可复现、可测试、可上线。
+        </p>
+        <p style="margin-top: 6px; color: var(--ink-2); font-size: 14px;">
+          🧠 信念：<em>Run the experiment. Trust the numbers. Ship the thing.</em>
+        </p>
       </div>
     </div>
 
+    <!-- Timeline -->
     <section>
-      <h2 class="section-title">时间线</h2>
+      <h2 class="section-title">// 工程时间线</h2>
       <div class="liquid-glass" style="padding: 22px 26px;">
-        <ul class="timeline" style="margin: 0; padding-left: 28px; list-style: none;">
+        <ul class="timeline" style="margin: 0; padding-left: 0; list-style: none;">
           {timeline.map((t) => (
-            <li class="timeline-item">
-              <time>{t.year}</time>
-              <p>{t.text}</p>
+            <li class="timeline-item" style={`border-left: 2px solid ${t.accent}; padding-left: 14px; margin-bottom: 14px;`}>
+              <time style={`color: ${t.accent}; font-weight: 600;`}>{t.year}</time>
+              <p style="margin-top: 4px;">{t.text}</p>
             </li>
           ))}
         </ul>
       </div>
     </section>
 
+    <!-- Tech Stack -->
     <section>
-      <h2 class="section-title">兴趣</h2>
+      <h2 class="section-title">// 技术栈</h2>
+      <div class="liquid-glass" style="padding: 22px 26px;">
+        {stack.map((s) => (
+          <div class="stack-row">
+            <span class="stack-label">{s.group}</span>
+            <div class="stack-tags">
+              {s.items.map((i) => <span class="tag">{i}</span>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interests -->
+    <section>
+      <h2 class="section-title">// 兴趣</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 8px;">
         {interests.map((i) => <span class="liquid-glass-pill">{i}</span>)}
       </div>
     </section>
 
+    <!-- Contact -->
     <section>
-      <h2 class="section-title">联系方式</h2>
+      <h2 class="section-title">// 联系方式</h2>
       <div class="liquid-glass" style="padding: 22px 26px;">
-        <p>GitHub：<a href={SITE_CONFIG.social.github}>{SITE_CONFIG.profile.github}</a></p>
+        <p>GitHub：<a href={SITE_CONFIG.social.github} target="_blank" rel="noopener">{SITE_CONFIG.profile.github}</a></p>
         <p style="margin-top: 6px;">Email：<a href={SITE_CONFIG.social.email}>{SITE_CONFIG.profile.email}</a></p>
+        <p style="margin-top: 6px; color: var(--ink-2); font-size: 14px;">
+          欢迎就 Agent / RAG / RL 微调合作交流。
+        </p>
       </div>
     </section>
   </section>
 </BaseLayout>
+
+<style>
+  .stack-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(148, 163, 184, 0.18);
+  }
+  .stack-row:last-child { border-bottom: none; }
+  .stack-label {
+    flex: 0 0 110px;
+    color: var(--ink-2);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.14);
+    color: var(--ink);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+  }
+</style>
