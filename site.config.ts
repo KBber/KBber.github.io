@@ -49,7 +49,6 @@ export const SITE_CONFIG = {
   /** Navigation order */
   nav: [
     { label: '首页', href: '/' },
-    { label: '仪表盘', href: '/dashboard' },
     { label: '项目', href: '/projects' },
     { label: '文章', href: '/posts' },
     { label: '相册', href: '/albums' },
