@@ -1,12 +1,30 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 ---
+
 <BaseLayout title="关于" activeNav="/about">
   <section class="portfolio-home project-directory">
-    <p class="eyebrow">ABOUT / KBber</p><h1>关注模型，也关注交付。</h1>
-    <p class="intro-description">我做 AI 应用工程，主要围绕金融文档、业务审核和多轮问答。喜欢把问题拆成可实现的流程，再通过测试与实验检查结果。</p>
-    <div class="local-work"><h2>我的工作方式</h2><p><strong>先找证据。</strong> 把模型给出的数字或结论关联回原始文档，方便复核。</p><p><strong>明确决策边界。</strong> 用规则处理确定性判断，让缺少证据的问题进入人工复核。</p><p><strong>通过实验迭代。</strong> 关注检索、记忆和端到端表现，把实现和评测一起记录。</p></div>
-    <div class="local-work"><h2>技术与背景</h2><p>Python · FastAPI · Pydantic · PyTorch · Neo4j · GitHub Actions</p><p>燕山大学 · 计算机科学与技术</p></div>
-    <div class="local-work"><h2>交流与联系</h2><p>欢迎通过 GitHub 交流项目实现、RAG 检索和 Agent 工程。</p><a class="primary-action" href="https://github.com/KBber">GitHub / KBber</a></div>
+    <h1>关于我</h1>
+    <p class="intro-description">
+      我是 KBber，主要做 Python 和 LLM 应用。
+      近期的项目包括财报数字校验、年报问答和带记忆的 ReAct Agent。
+    </p>
+
+    <div class="local-work">
+      <h2>项目里具体做了什么</h2>
+      <p>财报数字校验里，我保留了 PDF 的页码和坐标，方便从结果查回原文；文档问答用到了 Neo4j 和 GraphRAG。</p>
+      <p>多轮对话项目处理的是追问中的指代问题，比如「那另一家呢」指向哪家公司。实现包括会话存储、实体追踪和问题改写，代码里有对应的测试用例。</p>
+    </div>
+
+    <div class="local-work">
+      <h2>背景</h2>
+      <p>燕山大学，计算机科学与技术。</p>
+      <p>项目中用到的工具主要有 Python、FastAPI、Pydantic、PyTorch 和 Neo4j。</p>
+    </div>
+
+    <div class="local-work">
+      <h2>联系</h2>
+      <p><a href="https://github.com/KBber">GitHub / KBber</a></p>
+    </div>
   </section>
 </BaseLayout>

@@ -2,37 +2,66 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { projects } from '../data/projects';
-const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort((a,b) => +b.data.pubDate - +a.data.pubDate).slice(0,3);
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
+  .slice(0, 3);
 ---
+
 <BaseLayout activeNav="/">
   <div class="portfolio-home">
     <section class="intro">
-      <div class="intro-copy">
-        <p class="eyebrow">KBber / AI 应用工程</p>
-        <h1>把模型的能力，<br />做成<span>可信的工具。</span></h1>
-        <p class="intro-description">我构建面向金融文档与业务审核的 LLM 应用。关注证据溯源、Agent 记忆与工程评测，让每个结果都有可检查的依据。</p>
-        <div class="intro-actions"><a class="primary-action" href="/projects/">浏览项目</a><a class="secondary-action" href="https://github.com/KBber">GitHub</a></div>
-      </div>
-      <div class="system-map" aria-label="文档输入、检索、校验与人工复核的工作流程">
-        <div class="map-caption">EVIDENCE / WORKFLOW</div>
-        <div class="map-input">文档与问题 <span>PDF · Query</span></div>
-        <div class="map-connector"></div>
-        <div class="map-stage"><b>检索证据</b><span>Retrieval</span></div>
-        <div class="map-connector"></div>
-        <div class="map-stage"><b>规则校验</b><span>Verification</span></div>
-        <div class="map-connector"></div>
-        <div class="map-results"><span>通过</span><span>失败</span><span>人工复核</span></div>
-        <p>从原始文档，到可追溯的判断。</p>
+      <h1>你好，我是 KBber。</h1>
+      <p class="intro-description">
+        我主要写 Python，做财报解析、文档问答和多轮对话相关的项目。
+        这里放代码和实验记录，偶尔也写些笔记、放几张照片。
+      </p>
+      <div class="intro-actions">
+        <a class="primary-action" href="/projects/">看看项目</a>
+        <a class="secondary-action" href="https://github.com/KBber">GitHub</a>
       </div>
     </section>
-    <section class="work-section">
-      <div class="section-heading"><div><p class="eyebrow">SELECTED WORK</p><h2>从问题出发，落到实现。</h2></div><a href="/projects/">全部项目</a></div>
-      <div class="work-grid">{projects.filter(p=>p.featured).map(p=><a class="work-card" href={p.href}><span class="work-category">{p.category}</span><h3>{p.title}</h3><p>{p.description}</p><div class="work-stack">{p.stack.map(s=><span>{s}</span>)}</div><span class="repo-name">{p.name}</span></a>)}</div>
+
+    <section class="work-section" aria-labelledby="work-heading">
+      <div class="section-heading">
+        <h2 id="work-heading">最近的项目</h2>
+        <a href="/projects/">全部项目</a>
+      </div>
+      <div class="work-grid">
+        {projects.filter((project) => project.featured).map((project) => (
+          <a class="work-card" href={project.href}>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <div class="work-stack">{project.stack.join(' / ')}</div>
+            <span class="repo-name">{project.name}</span>
+          </a>
+        ))}
+      </div>
     </section>
-    <section class="writing-section">
-      <div class="section-heading"><div><p class="eyebrow">FIELD NOTES</p><h2>写下过程，也记录判断。</h2></div><a href="/posts/">全部文章</a></div>
-      <div class="writing-list">{posts.map(p=><a href={`/posts/${p.id}/`}><time datetime={p.data.pubDate.toISOString()}>{p.data.pubDate.toLocaleDateString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Asia/Shanghai'})}</time><div><h3>{p.data.title}</h3><p>{p.data.description}</p></div><span class="writing-type">阅读文章</span></a>)}</div>
+
+    <section class="writing-section" aria-labelledby="writing-heading">
+      <div class="section-heading">
+        <h2 id="writing-heading">最近的文章</h2>
+        <a href="/posts/">全部文章</a>
+      </div>
+      <div class="writing-list">
+        {posts.map((post) => (
+          <a href={`/posts/${post.id}/`}>
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                timeZone: 'Asia/Shanghai',
+              })}
+            </time>
+            <div>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
     </section>
-    <section class="closing"><h2>从代码开始交流。</h2><p>项目实现、实验记录与工具，都在 GitHub。</p><a class="secondary-action" href="https://github.com/KBber">访问 GitHub</a></section>
   </div>
 </BaseLayout>

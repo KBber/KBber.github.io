@@ -8,9 +8,9 @@ export const SITE_CONFIG = {
   /** Site identity */
   brand: {
     name: 'KBber',
-    tagline: 'AI 应用工程与实验记录',
-    signature: 'Run the experiment. Trust the numbers. Ship the thing.',
-    bio: '围绕 Agent · LLM · 强化学习的工程作品集 — 把论文搬进能跑、可测、可上线的系统。',
+    tagline: '项目与笔记',
+    signature: '代码、实验记录和日常笔记。',
+    bio: '我主要写 Python，做财报解析、文档问答和多轮对话相关的项目。',
   },
 
   /** Owner profile (used on Home and About) */
@@ -68,7 +68,7 @@ export const SITE_CONFIG = {
   seo: {
     titleTemplate: '%s · KBber',
     description:
-      'KBber 的个人主页 — AI Engineer，专注于 Agent 系统、LLM 应用工程（GraphRAG、Contextual RAG）与强化学习微调（GRPO / RLHF）。',
+      'KBber 的个人网站。记录 Python 和 LLM 应用项目，也放文章、笔记和照片。',
     ogImage: '/assets/2.jpg',
     lang: 'zh-CN',
   },

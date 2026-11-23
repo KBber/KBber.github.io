@@ -2,11 +2,32 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { projects } from '../data/projects';
 ---
-<BaseLayout title="项目" activeNav="/projects" description="KBber 的 AI 工程项目，涵盖证据溯源、GraphRAG、Agent 记忆、强化学习和端侧部署。">
-<section class="portfolio-home project-directory">
-  <p class="eyebrow">ENGINEERING PROJECTS</p><h1>实现，是最好的说明。</h1>
-  <p class="intro-description">从财报数字溯源到多轮 Agent 记忆。每个项目记录一个具体问题，以及解决它的技术路径。</p>
-  <div class="work-grid">{projects.map(p=><a class="work-card" href={p.href}><span class="work-category">{p.category}</span><h2>{p.title}</h2><p>{p.description}</p><div class="work-stack">{p.stack.map(s=><span>{s}</span>)}</div><span class="repo-name">{p.name}</span></a>)}</div>
-  <div class="local-work"><h2>本地探索</h2><p><strong>TenderGuard v0.4</strong> · 招投标合规审核，结合混合检索、规则引擎与人工复核。</p><p><strong>PosePilot</strong> · 离线拍照姿势工具，按场景组织动作示意与手机机位。</p><p><strong>vibe-knowledge-film</strong> · 从文案生成字幕、分镜与动效代码的视频制作 Skill。</p></div>
-</section>
+
+<BaseLayout
+  title="项目"
+  activeNav="/projects"
+  description="KBber 的项目，包括财报解析、GraphRAG 问答、Agent 记忆和模型训练。"
+>
+  <section class="portfolio-home project-directory">
+    <h1>项目</h1>
+    <p class="intro-description">做过的一些工具和实验。点开项目可以查看代码与说明。</p>
+
+    <div class="work-grid">
+      {projects.map((project) => (
+        <a class="work-card" href={project.href}>
+          <h2>{project.title}</h2>
+          <p>{project.description}</p>
+          <div class="work-stack">{project.stack.join(' / ')}</div>
+          <span class="repo-name">{project.name}</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="local-work">
+      <h2>本地项目</h2>
+      <p><strong>TenderGuard v0.4</strong> — 从招投标文档中检索证据，按规则检查合规项。缺少证据或结果冲突时交给人工复核。</p>
+      <p><strong>PosePilot</strong> — 按拍摄场景查姿势示意、动作步骤和手机机位，支持离线使用与收藏。</p>
+      <p><strong>vibe-knowledge-film</strong> — 根据文案制作字幕、分镜和动效代码，先生成约 30 秒样片，再制作全片。</p>
+    </div>
+  </section>
 </BaseLayout>
