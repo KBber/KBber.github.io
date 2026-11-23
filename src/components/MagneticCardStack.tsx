@@ -21,7 +21,7 @@ interface Props {
  */
 export default function MagneticCardStack({ items }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const cardRefs = useRef<Array<HTMLAnchorElement | null>>([]);
   const [dragging, setDragging] = useState(false);
   const reduceMotion = useRef(false);
 
@@ -31,18 +31,18 @@ export default function MagneticCardStack({ items }: Props) {
   }, []);
 
   useEffect(() => {
-    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    const cards = cardRefs.current.filter(Boolean) as HTMLAnchorElement[];
     if (!cards.length) return;
 
     const SNAP = 180;
     const cleanups: Array<() => void> = [];
 
-    cards.forEach((card, idx) => {
+    cards.forEach((card) => {
       let active = false;
       let pid: number | null = null;
       let startX = 0, startY = 0;
       let curX = 0, curY = 0;
-      let homeX = 0, homeY = 0;
+
 
       const down = (e: PointerEvent) => {
         if (reduceMotion.current) return;

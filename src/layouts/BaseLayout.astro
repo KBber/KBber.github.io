@@ -21,7 +21,7 @@ const {
 const fullTitle = title
   ? SITE_CONFIG.seo.titleTemplate.replace('%s', title)
   : `${SITE_CONFIG.brand.name} · ${SITE_CONFIG.brand.tagline}`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE_CONFIG.profile.avatar).toString();
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kbber.github.io').toString();
 ---
 
 <!doctype html>
@@ -48,7 +48,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE_CONFIG.profi
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 

@@ -5,15 +5,9 @@ import ThemeToggle from './ThemeToggle.astro';
 interface Props { active?: string }
 const { active } = Astro.props;
 const path = Astro.url.pathname;
-const isActive = (href: string) => {
-  if (href === '/') return path === '/' ? 'is-active' : '';
-  if (href === '/posts') return path.startsWith('/posts') ? 'is-active' : '';
-  if (href === '/albums') return path.startsWith('/albums') ? 'is-active' : '';
-  if (href === '/moments') return path.startsWith('/moments') ? 'is-active' : '';
-  if (href === '/notes') return path.startsWith('/notes') ? 'is-active' : '';
-  if (href === '/about') return path === '/about' ? 'is-active' : '';
-  return '';
-};
+const isActive = (href: string) =>
+  (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'))
+    ? 'is-active' : '';
 ---
 
 <header class="navbar">
@@ -40,7 +34,7 @@ const isActive = (href: string) => {
       <ul id="primary-nav" class="nav-links">
         {SITE_CONFIG.nav.map((item) => (
           <li>
-            <a href={item.href} class={isActive(item.href) || (active === item.href ? 'is-active' : '')}>
+            <a href={item.href} class={isActive(item.href) || (active === item.href ? 'is-active' : '')} aria-current={isActive(item.href) ? 'page' : undefined}>
               {item.label}
             </a>
           </li>
@@ -58,6 +52,13 @@ const isActive = (href: string) => {
   const btn = document.getElementById('nav-menu-btn');
   const list = document.getElementById('primary-nav');
   if (btn && list) {
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && list.classList.contains('is-open')) {
+        list.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.focus();
+      }
+    });
     btn.addEventListener('click', () => {
       const open = list.classList.toggle('is-open');
       btn.setAttribute('aria-expanded', String(open));

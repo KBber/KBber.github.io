@@ -1,0 +1,11 @@
+export const projects = [
+  { name: 'finverify', category: '文档智能', title: '让每个财报数字，都有据可查。', description: '将财务数字关联到 PDF 页码和坐标，用会计勾稽关系校验结果。点击数字即可回到原文，支持通过、失败与人工复核三态决策。', stack: ['Python', 'PyMuPDF', '规则校验'], href: 'https://github.com/KBber/finverify', featured: true },
+  { name: 'graphrag-financial-report', category: '知识图谱', title: '把分散的年报信息，连成可查询的关系。', description: '通过 Neo4j 组织实体与关系，结合局部和全局检索，处理需要串联多处证据的财务问题。', stack: ['GraphRAG', 'Neo4j', 'FastAPI'], href: 'https://github.com/KBber/graphrag-financial-report', featured: true },
+  { name: 'react-llm-memory-agent', category: 'Agent 记忆', title: '让「那另一家呢」成为一个完整问题。', description: '按会话保存短期记忆，通过实体追踪与指代消解改写追问，再交给 ReAct 工具链处理。包含单元测试与端到端对照用例。', stack: ['ReAct', 'Memory', 'Python'], href: 'https://github.com/KBber/react-llm-memory-agent', featured: true },
+  { name: 'video-skills-repo', category: '开发者工具', title: '把视频制作能力，装进 Agent 的工具箱。', description: '整合 5 套上游工具的 26 个技能，提供跨平台安装、依赖检查与技能发现校验。', stack: ['PowerShell', 'Python', 'CI'], href: 'https://github.com/KBber/video-skills-repo', featured: false },
+  { name: 'pd-grpo', category: '强化学习', title: '在重复博弈中，观察策略如何形成。', description: '用 GRPO 训练囚徒困境中的决策策略，通过训练曲线与实验记录分析合作和背叛行为。', stack: ['GRPO', 'PyTorch', 'Qwen'], href: 'https://github.com/KBber/pd-grpo', featured: false },
+  { name: 'chinese-ner-sequence-labeling', category: '自然语言处理', title: '同一个实体识别任务，比较四条技术路线。', description: '对比 BERT、CRF、LLM 提示与 LoRA 微调，记录不同建模方法的实现与评测。', stack: ['BERT', 'CRF', 'LoRA'], href: 'https://github.com/KBber/chinese-ner-sequence-labeling', featured: false },
+  { name: 'edgeai-trash-classifier', category: '端侧 AI', title: '把图像分类模型，部署到手机端。', description: '从图像分类训练到 Android 相机推理，探索轻量模型在端侧设备的交付。', stack: ['MobileNetV2', 'Android'], href: 'https://github.com/KBber/edgeai-trash-classifier', featured: false },
+  { name: 'contextual-retrieval-for-user-memory', category: '上下文工程', title: '为用户记忆补充可检索的上下文。', description: '围绕上下文检索与结构化记忆卡片，探索多轮交互中的记忆组织。', stack: ['Contextual RAG', 'Memory'], href: 'https://github.com/KBber/contextual-retrieval-for-user-memory', featured: false },
+  { name: 'S2DL', category: '研究复现', title: '高光谱图像聚类的运行环境适配。', description: '基于上游研究实现，处理 MATLAB 兼容性、构建与路径配置。', stack: ['MATLAB', 'Hyperspectral'], href: 'https://github.com/KBber/S2DL', featured: false },
+];

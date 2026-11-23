@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
   /** Site identity */
   brand: {
     name: 'KBber',
-    tagline: 'AI Engineer · Agents · LLMs · RL',
+    tagline: 'AI 应用工程与实验记录',
     signature: 'Run the experiment. Trust the numbers. Ship the thing.',
     bio: '围绕 Agent · LLM · 强化学习的工程作品集 — 把论文搬进能跑、可测、可上线的系统。',
   },
@@ -20,14 +20,14 @@ export const SITE_CONFIG = {
     role: 'AI Engineer',
     location: 'Earth',
     avatar: '/assets/2.jpg',
-    email: 'kbber@example.com',
+    email: '',
     github: 'KBber',
   },
 
   /** Social links shown in footer / about */
   social: {
     github: 'https://github.com/KBber',
-    email: 'mailto:kbber@example.com',
+    email: '',
   },
 
   /** Hero greeting messages by time of day */
