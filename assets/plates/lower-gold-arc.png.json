@@ -1,0 +1,10 @@
+{
+  "candidateCheck": ".impeccable/asset-work/lower-gold-arc-check.json",
+  "approved": false,
+  "note": "The 2x background crops add output pixels through Lanczos, not native generated detail.",
+  "promptFile": ".impeccable/asset-work/background-native-prompt.txt",
+  "nativeSourceSize": "1487x1058",
+  "source": ".impeccable/asset-work/candidates/lower-gold-arc.png",
+  "reference": ".impeccable/mocks/gold-case.png",
+  "method": "ImageGen raster, region crop with 2x Lanczos conversion"
+}

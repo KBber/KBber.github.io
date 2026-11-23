@@ -1,0 +1,10 @@
+{
+  "candidateCheck": ".impeccable/asset-work/source-button-material-check.json",
+  "approved": false,
+  "note": "The 2x background crops add output pixels through Lanczos, not native generated detail.",
+  "promptFile": ".impeccable/asset-work/button-native-prompt.txt",
+  "nativeSourceSize": "1774x887",
+  "source": ".impeccable/asset-work/candidates/source-button-material.png",
+  "reference": ".impeccable/mocks/gold-case.png",
+  "method": "native-alpha ImageGen, crop and downsample"
+}

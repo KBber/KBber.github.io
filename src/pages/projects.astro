@@ -10,21 +10,21 @@ import { projects } from '../data/projects';
 >
   <section class="portfolio-home project-directory">
     <h1>项目</h1>
-    <p class="intro-description">做过的一些工具和实验。点开项目可以查看代码与说明。</p>
+    <p class="intro-description">围绕财报、检索与对话做过的工具和实验。每个案例写清实现、复核方式和当前边界。</p>
 
     <div class="work-grid">
       {projects.map((project) => (
-        <a class="work-card" href={project.href}>
+        <a class="work-card" href={`/projects/${project.name}/`}>
           <h2>{project.title}</h2>
           <p>{project.description}</p>
           <div class="work-stack">{project.stack.join(' / ')}</div>
-          <span class="repo-name">{project.name}</span>
+          <span class="repo-name">{project.name}</span><span class="work-link">阅读案例<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></span>
         </a>
       ))}
     </div>
 
     <div class="local-work">
-      <h2>本地项目</h2>
+      <h2>更多项目</h2>
       <p><strong>TenderGuard v0.4</strong> — 从招投标文档中检索证据，按规则检查合规项。缺少证据或结果冲突时交给人工复核。</p>
       <p><strong>PosePilot</strong> — 按拍摄场景查姿势示意、动作步骤和手机机位，支持离线使用与收藏。</p>
       <p><strong>vibe-knowledge-film</strong> — 根据文案制作字幕、分镜和动效代码，先生成约 30 秒样片，再制作全片。</p>

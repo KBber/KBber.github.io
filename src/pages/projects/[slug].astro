@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { projectCases } from '../../data/project-cases';
+import preview from '../../../assets/plates/finverify-view.png';
+import memory from '../../../assets/projects/memory-comparison.svg?url';
+export function getStaticPaths() {
+  return projectCases.map(project => ({ params: { slug: project.name }, props: { project } }));
+}
+const { project } = Astro.props;
+const nextIndex = (projectCases.findIndex(item => item.name === project.name) + 1) % projectCases.length;
+const nextProject = projectCases[nextIndex];
+---
+<BaseLayout title={project.title} description={project.description} activeNav="/projects">
+  <article class="case-page">
+    <header class="case-heading">
+      <a class="back-link" href="/projects/">返回项目</a>
+      <h1>{project.name}</h1>
+      <p class="case-subtitle">{project.title}</p>
+      <p class="case-intro">{project.problem}</p>
+      <div class="case-stack" aria-label="使用的技术">{project.stack.map(item => <span>{item}</span>)}</div>
+      <div class="case-links">
+        <a class="text-action btn" href={project.href}>查看源码<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16 16 4M5 4h11v11"/></svg></a>
+        {project.name === 'finverify' && <a class="text-action btn btn--secondary" href="/demos/finverify/">打开交互演示</a>}
+      </div>
+    </header>
+    {project.name === 'finverify' && <a class="case-visual" href="/demos/finverify/" aria-label="打开 finverify 财报溯源交互演示"><img src={preview.src} alt="finverify 的合成财报演示，校验结果与 PDF 原文并列显示。" width={preview.width} height={preview.height} /></a>}
+    {project.name === 'react-llm-memory-agent' && <div class="case-visual"><img src={memory} alt="仓库中的多轮对话对照图，展示接入记忆前后的追问处理。" loading="lazy" /></div>}
+    <section class="case-implementation" aria-labelledby="implementation-title">
+      <h2 id="implementation-title">实现过程</h2>
+      <ol class="case-flow" aria-label="处理流程">{project.flow.map(item => <li>{item}</li>)}</ol>
+      <div class="implementation-rows">{project.implementation.map(item => <section class="implementation-row"><h3>{item.title}</h3><p>{item.text}</p></section>)}</div>
+    </section>
+    <section class="case-verification" aria-labelledby="verification-title">
+      <h2 id="verification-title">如何复核</h2>
+      <p>{project.verification}</p>
+      <h3>当前边界</h3>
+      <p>{project.boundary}</p>
+    </section>
+    <a class="case-next" href={`/projects/${nextProject.name}/`}><span>继续看项目</span><strong>{nextProject.title}</strong><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+  </article>
+</BaseLayout>

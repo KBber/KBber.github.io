@@ -10,6 +10,7 @@ const SITE = {
 
 export default defineConfig({
   site: SITE.url,
+  devToolbar: { enabled: false },
   integrations: [
     react(),
     sitemap(),

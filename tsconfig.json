@@ -5,13 +5,32 @@
     "jsxImportSource": "react",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@styles/*": ["src/styles/*"],
-      "@config": ["site.config"]
+      "@/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@config": [
+        "site.config"
+      ]
     }
   },
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "node_modules"]
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "_astro",
+    ".impeccable",
+    ".taste-skill"
+  ]
 }

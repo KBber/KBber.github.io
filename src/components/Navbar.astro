@@ -1,67 +1,62 @@
 ---
 import SITE_CONFIG from '../../site.config';
-import ThemeToggle from './ThemeToggle.astro';
+import sun from '../../assets/plates/brand-sun.png';
 
-interface Props { active?: string }
-const { active } = Astro.props;
-const path = Astro.url.pathname;
-const isActive = (href: string) =>
-  (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'))
-    ? 'is-active' : '';
+interface Props { active?: string; home?: boolean }
+const { active, home = false } = Astro.props;
+const pathname = Astro.url.pathname;
+const order = ['/projects', '/posts', '/notes', '/albums', '/about'];
+const items = SITE_CONFIG.nav.filter((item) => order.includes(item.href)).sort((a, b) => order.indexOf(a.href) - order.indexOf(b.href));
+const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/') || active === href;
 ---
 
-<header class="navbar">
+<header class:list={['navbar', { 'home-header': home }]}>
   <div class="nav-inner">
-    <a href="/" class="nav-brand" aria-label="Home">
-      <span class="logo" aria-hidden="true">K</span>
-      <span>{SITE_CONFIG.brand.name}</span>
+    <a href="/" class="nav-brand" aria-label="KBber 首页">
+      <img src={sun.src} width="76" height="65" alt="" />
+      <span>KBber</span>
     </a>
-
-    <button
-      class="mobile-menu-btn"
-      type="button"
-      aria-label="Toggle navigation"
-      aria-controls="primary-nav"
-      aria-expanded="false"
-      id="nav-menu-btn"
-    >
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 7h16M4 12h16M4 17h16" />
-      </svg>
+    <button class="mobile-menu-btn" type="button" aria-label="打开导航" aria-controls="primary-nav" aria-expanded="false" id="nav-menu-btn">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-
-    <nav aria-label="Primary">
+    <nav aria-label="主导航">
       <ul id="primary-nav" class="nav-links">
-        {SITE_CONFIG.nav.map((item) => (
-          <li>
-            <a href={item.href} class={isActive(item.href) || (active === item.href ? 'is-active' : '')} aria-current={isActive(item.href) ? 'page' : undefined}>
-              {item.label}
-            </a>
+        {items.map((item, index) => (
+          <li style={`--nav-position: ${index}`}>
+            <a href={item.href} class:list={{ 'is-active': isActive(item.href) }} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
           </li>
         ))}
+        <li class="github-link"><a href="https://github.com/KBber">GitHub</a></li>
       </ul>
     </nav>
-
-    <div class="nav-tools">
-      <ThemeToggle />
-    </div>
   </div>
 </header>
 
 <script>
-  const btn = document.getElementById('nav-menu-btn');
-  const list = document.getElementById('primary-nav');
-  if (btn && list) {
+  const button = document.getElementById('nav-menu-btn');
+  const menu = document.getElementById('primary-nav');
+  if (button && menu) {
+    function closeMenu() {
+      menu?.classList.remove('is-open');
+      button?.setAttribute('aria-expanded', 'false');
+      button?.setAttribute('aria-label', '打开导航');
+    }
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') !== 'true';
+      menu.classList.toggle('is-open', expanded);
+      button.setAttribute('aria-expanded', String(expanded));
+      button.setAttribute('aria-label', expanded ? '关闭导航' : '打开导航');
+    });
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && list.classList.contains('is-open')) {
-        list.classList.remove('is-open');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.focus();
+      if (event.key === 'Escape' && menu.classList.contains('is-open')) {
+        closeMenu();
+        button.focus();
       }
     });
-    btn.addEventListener('click', () => {
-      const open = list.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded', String(open));
+    menu.addEventListener('click', (event) => {
+      if ((event.target as Element).closest('a')) closeMenu();
     });
+    const desktop = matchMedia('(min-width: 1000px)');
+    desktop.addEventListener('change', () => { if (desktop.matches) closeMenu(); });
   }
 </script>

@@ -1,0 +1,15 @@
+{
+  "source": ".impeccable/asset-work/sun-generated.png",
+  "candidateCheck": ".impeccable/asset-work/brand-sun-check.json",
+  "reference": ".impeccable/asset-work/brand-sun-reference.png",
+  "alphaInspection": [
+    ".impeccable/asset-work/brand-sun-dark.png",
+    ".impeccable/asset-work/brand-sun-white.png"
+  ],
+  "approved": false,
+  "rejectedRefinement": ".impeccable/asset-work/brand-sun-refined-check.json",
+  "method": "native-alpha ImageGen, then downsample",
+  "note": "Raw transparent preview looked filled; compositing on dark and white confirmed fine rings and true empty alpha gaps. Selected first candidate after alpha-aware visual inspection.",
+  "nativeSourceSize": "1354x1162",
+  "promptFile": ".impeccable/asset-work/sun-native-prompt.txt"
+}

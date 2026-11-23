@@ -33,3 +33,11 @@ Thumbs.db
 .cache
 .parcel-cache
 .turbo
+
+# Local design review runtime
+/_astro
+
+# Local design working files and browser profiles
+/.taste-skill/
+/.impeccable/*
+!/.impeccable/design.json

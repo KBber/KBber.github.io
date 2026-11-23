@@ -1,0 +1,10 @@
+{
+  "candidateCheck": ".impeccable/asset-work/sand-texture-check.json",
+  "approved": false,
+  "note": "The 2x background crops add output pixels through Lanczos, not native generated detail.",
+  "promptFile": ".impeccable/asset-work/texture-origin.txt",
+  "nativeSourceSize": "40x140",
+  "source": ".impeccable/asset-work/candidates/sand-texture.png",
+  "reference": ".impeccable/mocks/gold-case.png",
+  "method": "clean texture reference, mirror-tiled"
+}

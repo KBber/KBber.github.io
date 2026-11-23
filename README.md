@@ -1,71 +1,41 @@
-# KBber's Blog
+# KBber 的项目与笔记
 
-Personal blog of **KBber** — built with **Astro + React**, deployed to **GitHub Pages**.
+基于 Astro、TypeScript 和 React 的个人网站，部署在 GitHub Pages。
 
-🌐 Live: <https://kbber.github.io>
+## 本地运行
 
-## ✨ Features
-
-- **Liquid Glass** UI — `backdrop-filter` based translucent surfaces
-- **Light / Dark / System** theme switcher
-- **Animated hero** — live clock + greeting + IP-based weather
-- **Draggable magnetic cards** on the home page (vanilla pointer events, no GSAP)
-- **Reading progress bar** on article pages
-- **Photo lightbox** for albums with keyboard navigation
-- **View transitions** for smooth page changes
-- **Markdown content collections** — posts, notes, moments, albums
-
-## 🗂 Sections
-
-| Section | Path | Source |
-|---|---|---|
-| 首页 Home | `/` | — |
-| 文章 Posts | `/posts` | `src/content/posts/*.md` |
-| 相册 Albums | `/albums` | `src/content/albums/*.json` |
-| 随笔 Moments | `/moments` | `src/content/moments/*.md` |
-| 笔记 Notes | `/notes` | `src/content/notes/*.md` |
-| 关于 About | `/about` | — |
-
-## 🚀 Local development
-
-```bash
-npm install
-npm run dev        # http://localhost:4321
-npm run build      # → dist/
-npm run preview    # preview the built site
+```sh
+npm ci
+npm run dev
 ```
 
-## ⚙️ Configuration
+发布前运行：
 
-All identity, theme tokens, nav order, and social links live in **`site.config.ts`** — edit that file to make it yours.
-
-## 🚢 Deploy
-
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site with Astro and publishes the `dist/` folder to GitHub Pages.
-
-- Settings → Pages → Source: **GitHub Actions**
-- Workflow file: `.github/workflows/deploy.yml`
-
-## 📁 Project structure
-
-```
-.
-├── .github/workflows/deploy.yml   # Auto-deploy
-├── astro.config.mjs               # Astro + sitemap config
-├── site.config.ts                 # Central config (you!)
-├── public/
-│   ├── assets/                    # Existing images
-│   ├── bricks.svg
-│   └── favicon.svg
-└── src/
-    ├── components/                # Astro + React components
-    ├── content.config.ts          # Content collections
-    ├── content/                   # Markdown / JSON for posts, notes, moments, albums
-    ├── layouts/BaseLayout.astro
-    ├── pages/                     # Routes
-    └── styles/global.css
+```sh
+npx astro check
+npm run build
+npm run preview
 ```
 
-## 🪪 License
+`dist/` 为生成文件，不直接编辑。
 
-MIT — feel free to fork, learn, and remix.
+## 内容维护
+
+- `src/data/projects.ts`：公开项目的名称、简介、技术和仓库链接。
+- `src/data/project-cases.ts`：项目背景、实现过程、复核方式和当前边界。
+- `src/data/home-projects.ts`：首页三个项目的展示文案与流程。
+- `src/pages/projects/[slug].astro`：共用的项目案例模板。
+- `src/content/`：文章、笔记和相册内容。
+- `site.config.ts`：站点身份、导航与 SEO 信息。
+- `assets/plates/`：已确认的金色素材与真实项目截图。
+- `assets/fonts/`：本地字体和许可。
+- `assets/projects/`：项目仓库中的展示图。
+- `public/demos/finverify/`：使用合成数据的独立交互演示。
+
+新增公开项目时同步维护项目信息和案例内容。项目描述应能从对应仓库复核，上游项目需写清贡献范围。页面使用公开账号名 KBber。
+
+## 视觉与交互
+
+深色底与古金色材质。首页展示具体项目，案例页采用较安静的阅读布局。项目由访客主动切换，背景动效支持暂停、减少动态效果，并在页面不可见时停止。
+
+设计约定见 `DESIGN.md`。设计过程截图、浏览器配置与临时构建目录均不随站点发布。

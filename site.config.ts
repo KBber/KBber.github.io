@@ -41,9 +41,9 @@ export const SITE_CONFIG = {
 
   /** Brand color tokens (CSS variables consumed by global.css) */
   theme: {
-    accent: '#06B6D4',        // cyan — agent / system
-    accentSoft: '#67E8F9',
-    accentDeep: '#0E7490',
+    accent: '#e3a94f',        // approved antique gold
+    accentSoft: '#edc580',
+    accentDeep: '#986121',
   },
 
   /** Navigation order */
