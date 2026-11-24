@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { projectCases } from '../../data/project-cases';
-import preview from '../../../assets/plates/finverify-view.png';
-import memory from '../../../assets/projects/memory-comparison.svg?url';
+import FinverifyPreview from '@components/FinverifyPreview.astro';
+import MemoryPreview from '@components/MemoryPreview.astro';
 export function getStaticPaths() {
   return projectCases.map(project => ({ params: { slug: project.name }, props: { project } }));
 }
@@ -20,11 +20,8 @@ const nextProject = projectCases[nextIndex];
       <div class="case-stack" aria-label="使用的技术">{project.stack.map(item => <span>{item}</span>)}</div>
       <div class="case-links">
         <a class="text-action btn" href={project.href}>查看源码<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16 16 4M5 4h11v11"/></svg></a>
-        {project.name === 'finverify' && <a class="text-action btn btn--secondary" href="/demos/finverify/">打开交互演示</a>}
-      </div>
-    </header>
-    {project.name === 'finverify' && <a class="case-visual" href="/demos/finverify/" aria-label="打开 finverify 财报溯源交互演示"><img src={preview.src} alt="finverify 的合成财报演示，校验结果与 PDF 原文并列显示。" width={preview.width} height={preview.height} /></a>}
-    {project.name === 'react-llm-memory-agent' && <div class="case-visual"><img src={memory} alt="仓库中的多轮对话对照图，展示接入记忆前后的追问处理。" loading="lazy" /></div>}
+        {project.name === 'finverify' && <div class="case-visual case-native-preview"><FinverifyPreview /></div>}
+    {project.name === 'react-llm-memory-agent' && <div class="case-visual"><MemoryPreview /></div>}
     <section class="case-implementation" aria-labelledby="implementation-title">
       <h2 id="implementation-title">实现过程</h2>
       <ol class="case-flow" aria-label="处理流程">{project.flow.map(item => <li>{item}</li>)}</ol>

@@ -190,7 +190,7 @@ function clearAll(){
   items.forEach(e => e.classList.remove('sel'));
 }
 
-function focusItem(el, shouldScroll = true){
+function focusItem(el, shouldScroll = true, instant = false){
   clearAll();
   el.classList.add('sel');
   const pg = document.getElementById('pg' + el.dataset.page);
@@ -207,7 +207,7 @@ function focusItem(el, shouldScroll = true){
   hl.className = 'hl on' + (el.dataset.bad === '1' ? ' bad' : '');
 
   if (!shouldScroll) return;
-  const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  const behavior = instant || matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
   if (matchMedia('(max-width:700px)').matches) {
     pg.scrollIntoView({ block: 'start', behavior });
   } else {
@@ -221,7 +221,7 @@ items.forEach(el => el.addEventListener('click', () => focusItem(el)));
 
 // 初始：自动聚焦第一个被判定有问题的指标
 const firstBad = items.find(e => e.dataset.bad === '1') || items[0];
-if(firstBad) setTimeout(() => focusItem(firstBad, !matchMedia('(max-width:700px)').matches), 400);
+if(firstBad) Promise.all([...document.images].map(img => img.decode().catch(() => {}))).then(() => requestAnimationFrame(() => focusItem(firstBad, !matchMedia('(max-width:700px)').matches, true)));
 </script>
 <script>
 document.querySelectorAll('.item').forEach(item=>{

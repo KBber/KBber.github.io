@@ -1,0 +1,52 @@
+---
+import sample from '../data/finverify-demo.json';
+const amount = (label: string) => Number(sample.metrics.find(row => row.label === label)!.value.replaceAll(',', ''));
+const views = [
+  { code: 'BS_BALANCE', label: '资产负债关系', page: 2, title: '合并资产负债表', equation: '资产 = 负债 + 所有者权益', delta: amount('负债和所有者权益总计') - amount('负债合计') - amount('所有者权益合计') },
+  { code: 'IS_NET_PROFIT', label: '利润计算', page: 3, title: '合并利润表', equation: '净利润 = 利润总额 − 所得税费用', delta: amount('三、利润总额') - amount('减:所得税费用') - amount('四、净利润') },
+  { code: 'CF_BRIDGE', label: '现金流关系', page: 4, title: '合并现金流量表', equation: '净增加额 = 经营 + 投资 + 筹资', delta: amount('经营活动产生的现金流量净额') + amount('投资活动产生的现金流量净额') + amount('筹资活动产生的现金流量净额') - amount('现金及现金等价物净增加额') },
+];
+---
+<div class="fv-preview" data-finverify-preview>
+  <header class="fv-header"><h2>finverify</h2><span>合成数据演示</span><a href="/demos/finverify/" target="_blank" rel="noopener">打开原始 PDF 演示</a></header>
+  <div class="fv-workspace">
+    <div class="fv-checks" role="group" aria-label="选择财报校验关系">
+      <p class="fv-label">勾稽校验</p>
+      {views.map((view, index) => <button type="button" class="fv-check" data-evidence-select={index} aria-pressed={index === 0}>
+        <span class="fv-check-title"><strong>{view.label}</strong><span class:list={['fv-status', { 'is-fail': view.delta !== 0 }]}>{view.delta === 0 ? 'PASS' : 'FAIL'}</span></span>
+        <code>{view.code}</code><span class="fv-equation">{view.equation}</span><span class="fv-delta">差异 {view.delta.toFixed(2)}</span>
+      </button>)}
+    </div>
+    <div class="fv-evidence" aria-live="polite">
+      {views.map((view, index) => <section class="fv-paper" data-evidence-page={index} hidden={index !== 0}>
+        <h3>{view.title}</h3><p class="fv-source">第 {view.page} 页 · 表格摘要 · {sample.year} 年</p>
+        <div class="fv-table-scroll" tabindex={0} aria-label={`${view.title}指标与金额`}>
+          <table><thead><tr><th scope="col">项目</th><th scope="col">金额（元）</th></tr></thead><tbody>{sample.metrics.filter(row => row.page === view.page).map(row => <tr><th scope="row">{row.label}</th><td>{row.value}</td></tr>)}</tbody></table>
+        </div>
+        <p class="fv-source-detail">数字取自合成财报。原始 PDF 演示保留了页码、坐标与单元格定位。</p>
+      </section>)}
+    </div>
+  </div>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-finverify-preview]').forEach(root => {
+    const buttons = root.querySelectorAll<HTMLButtonElement>('[data-evidence-select]');
+    const pages = root.querySelectorAll<HTMLElement>('[data-evidence-page]');
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const selected = button.dataset.evidenceSelect;
+      buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      pages.forEach(page => { page.hidden = page.dataset.evidencePage !== selected; });
+    }));
+  });
+</script>
+<style>
+.fv-preview{height:100%;display:flex;flex-direction:column;color:#e6edf3;background:#151a20;font:.875rem/1.65 var(--font-sans,'Microsoft YaHei',sans-serif)}
+.fv-header{display:flex;align-items:center;gap:12px 18px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid #38434d}
+.fv-header h2{font:600 1.125rem/1.4 var(--font-sans);margin:0}.fv-header>span{color:#b1bdc9}.fv-header a{margin-left:auto;display:inline-flex;align-items:center;min-height:44px;color:#8fc6ff;text-decoration:underline}
+.fv-workspace{display:grid;grid-template-columns:minmax(200px,31%) minmax(0,1fr);flex:1;min-height:0}
+.fv-checks{padding:16px;overflow:auto}.fv-label{margin:0 0 12px;color:#b1bdc9}
+.fv-check{display:grid;gap:8px;width:100%;padding:14px;margin:0 0 12px;text-align:left;color:#e6edf3;background:#1c2128;border:1px solid #465566;border-radius:8px;font:inherit}
+.fv-check[aria-pressed=true]{border-color:#71c581}.fv-check-title{display:flex;align-items:center;justify-content:space-between;gap:8px}.fv-check-title strong{font-weight:500;font-size:1rem}.fv-status{font:600 .75rem/1.5 var(--font-mono,monospace);color:#8ad79a}.fv-status.is-fail{color:#ff9d97}.fv-check code{font-size:.75rem;color:#b1bdc9}.fv-equation{font-size:.875rem}.fv-delta{color:#8ad79a;font-size:.875rem}
+.fv-evidence{min-width:0;overflow:auto;padding:16px;background:#0d1117}.fv-paper{min-height:100%;padding:28px 22px;background:#fff;color:#17212b;border-radius:3px}.fv-paper h3{font-size:1.25rem;line-height:1.5;font-weight:500;margin:0 0 8px}.fv-source{font-size:.875rem;color:#475767;margin:0 0 22px}.fv-table-scroll{overflow:auto}.fv-table-scroll:focus-visible{outline-color:#1b65a9}table{width:100%;border-collapse:collapse;font-size:.875rem}th,td{padding:12px 8px;border-bottom:1px solid #c4cdd4;text-align:left}thead th{font-weight:600;border-bottom:1px solid #17212b}tbody th{font-weight:400;min-width:110px}td{font-family:var(--font-mono,monospace);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}.fv-source-detail{font-size:.875rem;line-height:1.7;color:#475767;margin-top:28px}
+@media(max-width:700px){.fv-header{padding:10px 14px}.fv-header h2{font-size:1rem}.fv-header a{margin-left:0}.fv-workspace{display:flex;flex-direction:column}.fv-checks{display:flex;gap:8px;padding:12px;flex-shrink:0}.fv-label{display:none}.fv-check{display:block;width:auto;flex:1;margin:0;padding:10px 6px;text-align:center;min-height:64px}.fv-check-title{display:grid;gap:3px;justify-content:center}.fv-check-title strong{font-size:.875rem}.fv-check code,.fv-equation,.fv-delta{display:none}.fv-evidence{flex:1;padding:10px;min-height:0}.fv-paper{padding:20px 12px}.fv-paper h3{font-size:1.125rem}th,td{padding:10px 6px}.fv-source-detail{margin-top:20px}}
+</style>
