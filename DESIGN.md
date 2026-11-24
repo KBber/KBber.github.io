@@ -131,10 +131,12 @@ components:
     rounded: '{rounded.content}'
     padding: 24px
   motion-toggle:
+    width: 44px
+    height: 44px
     backgroundColor: '{colors.bg}'
-    textColor: '#dfbd7a'
+    textColor: '{colors.ink-2}'
     rounded: '{rounded.code-block}'
-    padding: 8px 12px
+    padding: 0
   evidence-summary:
     backgroundColor: '#151a20'
     textColor: '#e6edf3'
@@ -149,7 +151,7 @@ components:
 
 Matte black and deep umber carry antique gold, warm ochre and the fine grain of sand. The material feels tactile and restrained: broad arcs and concentric marks have physical texture, while the interface stays clear enough to inspect real software work. KBber is the only public owner identity.
 
-This system has an expressive showcase surface and quiet reading surfaces. The homepage uses the approved gold material world; project cases, articles and notes inherit its palette and typography with an untextured ground. Functional text and controls stay semantic. The homepage composition is documented in the surface brief, not prescribed as a template for every page.
+This system has an expressive showcase surface and quiet reading surfaces. The homepage uses the approved gold material world; project cases, articles, notes and other inner pages inherit its palette, typography and a shared peripheral orbital motion layer over an untextured ground. Functional text and controls stay semantic. The homepage composition is documented in the surface brief, not prescribed as a template for every page.
 
 **Key Characteristics:**
 
@@ -157,7 +159,7 @@ This system has an expressive showcase surface and quiet reading surfaces. The h
 - Real raster sand and metal provide material depth.
 - Humanist Latin type and system CJK text remain legible.
 - Project evidence stays independent of decorative artwork.
-- Slow bounded dust, a visible pause control and immediate manual switching keep motion subordinate to reading.
+- Traveling gold points make motion visible: they follow real raster ridges at home and peripheral geometric orbits on inner pages. Foreground content stays stable, with one shared pause control and immediate manual switching.
 
 Source of truth: `src/styles/global.css`, `src/styles/taste-motion.css`, `src/layouts/BaseLayout.astro`, shared components, `src/pages/index.astro`, the project case template, shared `FinverifyPreview.astro` / `MemoryPreview.astro` components, and the original local demo in `public/demos/finverify/index.html`.
 
@@ -291,9 +293,16 @@ The financial summary uses an independently scrollable check rail and a white-pa
 
 ### Background motion control
 
-A visible text button pauses or resumes the dust; its persisted preference is stored locally. The raster artwork remains still. The canvas draws (38) low-opacity grains, each orbiting within (12px) horizontally and (8px) vertically, at roughly (30fps). Motion stops while the hero is out of view or the document is hidden. Reduced motion clears the dust, disables the toggle with an explanatory label, and leaves all project controls usable.
+A pause/play icon button occupies a reserved slot in every site page's navigation; it pauses or resumes the shared decorative motion without covering document content. Its text alternative and tooltip name the action. Inner-page navigation stays at the top during scrolling; the homepage retains its existing normal-flow header. Its persisted preference follows full-document navigation. The control is (44px) square. At phone widths the brand gap becomes (12px), preserving all navigation targets at (320px). There is one canvas per document, capped at (1.5) DPR with at least (32ms) between draws.
 
-**The Bounded Motion Rule.** Only background grains drift continuously. Preserve the pause control, reduced-motion fallback and manual project selection; keep evidence stable while it is read.
+On the homepage, the raster artwork retains its intrinsic shape and position. Bright points with short fading tails follow upper/lower ridge coordinates extracted from the original gold plates in `src/data/gold-ridges.json`; coordinates are normalized by source width and keep intrinsic proportions across viewports. Three heads per ridge travel in (7.5s) and (9s) respectively, fading at endpoints. A screen-blended duplicate of the same cached plates is revealed by one broad (7s) linear moving mask, with (-1.75s) initial phase and (.8) opacity. The canvas also carries (76) grains drifting (16–32px/s) horizontally and (9px/s) upwards, with soft edge fades.
+
+Inner pages have three peripheral geometric orbital tracks, each with four spaced moving heads and short tails, plus (36) low-alpha grains. Most heads are outside the canvas at any time; the spacing keeps a clear traveling head within the clipped visible arcs instead of leaving multi-second dead intervals. The tracks sit behind content, stay at (1px) and a low alpha, and use darker ochre in the optional light reading theme. Heads move at (.27–.32rad/s), so the background has a visible direction without shifting text or evidence. Project/entry links answer hover and focus with a warmer border; project-link arrows travel (4px) while the target stays fixed.
+
+The shared playback state stops all animation while the document is hidden, and stops homepage motion while its hero is offscreen. Reduced motion leaves the original static raster at home and quiet static orbital outlines on inner pages, removes moving heads and dust, and disables the toggle with an explanatory label. Live preference changes and route-to-route pause persistence are supported. The user approved this stronger cross-page example for publication on2026-11-24 after reviewing the local preview. The final narrow motion review cleared both visibility and control-overlap repairs; the historical whole-surface comp gate retains its separate status.
+
+**The Bounded Motion Rule.** Only background gold points, light and grains loop continuously. Preserve pause persistence, reduced-motion alternatives and manual project selection. Keep all text, icons, artwork geometry and evidence stable while read. Standalone project demos retain their own functional interface rather than receiving decorative site motion.
+
 
 ## Do's and Don'ts
 

@@ -49,7 +49,7 @@
 }
 * { box-sizing: border-box; scrollbar-color: var(--line) var(--bg); scrollbar-width: thin; }
 html { scroll-padding-top: 16px; -webkit-text-size-adjust: 100%; }
-body { margin: 0; color: var(--ink); background-color: var(--bg); background-image: var(--sand-texture); font-family: var(--font-sans); font-size: 16px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+body { isolation: isolate; margin: 0; color: var(--ink); background-color: var(--bg); background-image: var(--sand-texture); font-family: var(--font-sans); font-size: 16px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
 .light-mode body { background-image: none; }
 ::selection { background: var(--accent); color: var(--bg); }
 a { color: inherit; text-decoration: none; text-underline-offset: .25em; }
@@ -214,6 +214,13 @@ html:not(.home-page) body { background-image: none; }
 .hero-art { position: absolute; z-index: -2; width: 100%; height: auto; max-width: none; pointer-events: none; }
 .art-upper { inset: 0 0 auto; mask-image: linear-gradient(to bottom,#000 calc(100% - 48px),transparent); }
 .art-lower { inset: auto 0 0; mask-image: linear-gradient(to bottom,transparent,#000 48px); }
+/* Light crosses the existing gold texture; the artwork and live content never move. */
+.gold-light-flow { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .8; mix-blend-mode: screen; mask-image: linear-gradient(90deg,transparent 34%,rgba(0,0,0,.35) 43%,#000 50%,rgba(0,0,0,.35) 57%,transparent 66%); mask-size: 300% 100%; mask-repeat: no-repeat; animation: gold-light-flow 7s linear -1.75s infinite; animation-play-state: paused; }
+.gold-light-flow .hero-art { z-index: auto; }
+[data-background-motion="running"] .gold-light-flow { animation-play-state: running; }
+[data-background-motion="reduced"] .gold-light-flow { display: none; }
+@keyframes gold-light-flow { from { mask-position: 100% 0; } to { mask-position: 0% 0; } }
+@media (prefers-reduced-motion: reduce) { .gold-light-flow { display: none; animation: none; } }
 .sand-motion { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100svh; pointer-events: none; }
 .case-layout,.case-bottom { width: calc(100% - clamp(40px,6.6vw,128px)); max-width: 1680px; margin-inline: auto; }
 .case-layout { display: grid; grid-template-columns: minmax(250px,23%) minmax(0,1fr); grid-template-areas: 'intro showcase' 'related showcase'; column-gap: clamp(32px,3.3vw,64px); row-gap: 28px; }
@@ -323,3 +330,21 @@ html[data-motion] .case-hero .related-project { position: relative; display: fle
 /* Keep the longer short project name whole inside the desktop intro column. */
 [data-active-project="graphrag"] .home-project-title { font-size: clamp(2.75rem,2rem + 1.7vw,3.5rem); }
 @media(max-width:639px) { [data-active-project="graphrag"] .home-project-title { font-size: clamp(2rem,1.5rem + 2vw,3.5rem); } }
+
+/* Shared orbital material: behind content, with a persistent control on every page. */
+.page-ambient { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.page-ambient canvas { display: block; width: 100%; height: 100%; }
+.work-card,.entry-card { transition: border-color .18s var(--ease); }
+.work-card:hover,.work-card:focus-visible,.entry-card:hover,.entry-card:focus-visible { border-color: var(--accent); }
+.work-link svg { transition: transform .18s var(--ease); }
+.work-card:is(:hover,:focus-visible) .work-link svg { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { .work-card:is(:hover,:focus-visible) .work-link svg { transform: none; } }
+
+.navbar:not(.home-header) { position: sticky; top: 0; }
+.nav-motion-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); background: var(--bg); color: var(--ink-2); }
+.nav-motion-toggle:hover { color: var(--accent); }
+.nav-motion-toggle:disabled { opacity: 1; color: var(--muted); }
+.nav-motion-toggle[aria-pressed="true"] .motion-icon-pause,.nav-motion-toggle:not([aria-pressed="true"]) .motion-icon-play { display: none; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width:999px) { .nav-motion-toggle { margin-left: 12px; } }
+@media (max-width:639px) { .nav-brand,.home-header .nav-brand { gap: 12px; } }

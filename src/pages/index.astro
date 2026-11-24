@@ -9,9 +9,13 @@ import sourceButton from '../../assets/plates/source-button-material.png';
 import { homeProjects } from '../data/home-projects';
 ---
 <BaseLayout home activeNav="/projects">
-  <section class="case-hero" aria-labelledby="home-project-title" data-home-project>
+  <section class="case-hero" aria-labelledby="home-project-title" data-home-project data-motion-surface>
     <img class="hero-art art-upper" src={upper.src} alt="" width={upper.width} height={upper.height} fetchpriority="high" />
     <img class="hero-art art-lower" src={lower.src} alt="" width={lower.width} height={lower.height} />
+    <div class="gold-light-flow" aria-hidden="true">
+      <img class="hero-art art-upper" src={upper.src} alt="" width={upper.width} height={upper.height} />
+      <img class="hero-art art-lower" src={lower.src} alt="" width={lower.width} height={lower.height} />
+    </div>
     <canvas class="sand-motion" aria-hidden="true" data-sand-canvas></canvas>
     <div class="case-layout">
       <div class="project-intro">
@@ -61,7 +65,6 @@ import { homeProjects } from '../data/home-projects';
     </div>
     <div class="case-bottom">
       <button class="next-project" type="button" id="home-next-project"><span class="next-label">下一案例</span><span class="next-name">graphrag-financial-report</span><span class="next-description">基于图检索的财报问答</span></button>
-      <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">暂停背景动效</button>
     </div>
   </section>
   <script is:inline define:vars={{ projects: homeProjects }}>
@@ -102,8 +105,5 @@ import { homeProjects } from '../data/home-projects';
     steps.forEach((button) => button.addEventListener('click', () => showStep(Number(button.dataset.step))));
     related.forEach((button) => button.addEventListener('click', () => showProject(Number(button.dataset.project))));
     next.addEventListener('click', () => showProject((current + 1) % projects.length));
-  </script>
-  <script>
-    import '../scripts/sand-motion';
   </script>
 </BaseLayout>

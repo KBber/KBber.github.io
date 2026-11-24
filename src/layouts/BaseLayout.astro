@@ -55,11 +55,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://kbber.gi
   </head>
   <body style={`--sand-texture: url("${sand.src}")`}>
     <a class="skip-link" href="#main">跳到主要内容</a>
+    {!home && <div class="page-ambient" aria-hidden="true" data-motion-surface><canvas data-sand-canvas></canvas></div>}
     <Navbar active={activeNav} home={home} />
     <main id="main"><slot /></main>
     <Footer home={home} />
     <script>
       import '../scripts/taste-motion.js';
+      import '../scripts/sand-motion';
     </script>
   </body>
 </html>

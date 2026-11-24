@@ -384,14 +384,24 @@
         "name": "button-press"
       },
       {
-        "value": "38 grains; x orbit 12px; y orbit 8px; >=32ms between draws",
-        "purpose": "Slow bounded background only. Raster plates stay still; pause persists locally, stops offscreen or hidden, and reduced motion clears dust.",
+        "value": "76home/36inner grains;16–32px/s right,9px/s up;soft edge fades;>=32ms draws;capped1.5DPR",
+        "purpose": "Shared bounded ambient material on every site page; persisted pause, hidden-document suspension and live reduced-motion path.",
         "name": "background-dust"
       },
       {
         "value": "immediate",
         "purpose": "Project and evidence changes are user initiated and have no whole-preview opacity fade.",
         "name": "manual-project-switch"
+      },
+      {
+        "name": "background-gold-light",
+        "value": "7s linear masked light pass;-1.75s initial phase;.8screen blend",
+        "purpose": "Stronger illumination over cached real gold plates at home; geometric artwork stays stable. User accepted the stronger cross-page preview for publication on2026-11-24."
+      },
+      {
+        "name": "gold-traveling-points",
+        "value": "3heads per raster ridge at7.5s/9s home;4spacedheads on each of3peripheralorbits at.27–.32rad/s inner;18tailsegments",
+        "purpose": "Visible directional material motion without shifting foreground. Reserved44px navigation pause/play slot on every page; darker ochre in light reading theme."
       }
     ],
     "breakpoints": [
@@ -494,20 +504,20 @@
       "name": "Background motion control",
       "kind": "button",
       "refersTo": "motion-toggle",
-      "description": "Visible text toggle for dust; reduced-motion state is explanatory and disabled.",
-      "html": "<button class=\"ds-motion-toggle\" type=\"button\" aria-pressed=\"false\">暂停背景动效</button>",
-      "css": ".ds-motion-toggle{min-height:44px;padding:8px 12px;border:0;border-radius:6px;background:#15120f;color:#dfbd7a;font:400 .875rem/1.75 var(--font-sans,'Wix Madefor Text','Microsoft YaHei','PingFang SC',sans-serif);cursor:pointer}.ds-motion-toggle:hover{color:#ffe0a7}.ds-motion-toggle:focus-visible{outline:2px solid var(--accent-soft,#edc580);outline-offset:5px}.ds-motion-toggle:active{color:#ffe0a7}.ds-motion-toggle:disabled{cursor:default;opacity:.8}"
+      "description": "One44px pause/play SVG control in a reserved navigation slot on every site page; accessible text and tooltip, no content overlay. Persisted across routes, explanatory and disabled under reduced motion.",
+      "html": "<button class=\"ds-motion-toggle\" type=\"button\" aria-label=\"Pause background motion\" title=\"Pause background motion\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M8 5v14M16 5v14\"/></svg></button>",
+      "css": ".ds-motion-toggle{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #6d4d27;border-radius:6px;background:#15120f;color:#dfc391;cursor:pointer}.ds-motion-toggle:disabled{opacity:1;color:#c8aa79}"
     }
   ],
   "narrative": {
     "northStar": "Kinetic Sand Glyphs",
-    "overview": "Matte black and deep umber carry antique gold, warm ochre and the fine grain of sand. The material feels tactile and restrained: broad arcs and concentric marks have physical texture, while the interface stays clear enough to inspect real software work. KBber is the only public owner identity.\n\nThis system has an expressive showcase surface and quiet reading surfaces. The homepage uses the approved gold material world; project cases, articles and notes inherit its palette and typography with an untextured ground. Functional text and controls stay semantic. The homepage composition is documented in the surface brief, not prescribed as a template for every page.",
+    "overview": "Matte black and deep umber carry antique gold, warm ochre and the fine grain of sand. The material feels tactile and restrained: broad arcs and concentric marks have physical texture, while the interface stays clear enough to inspect real software work. KBber is the only public owner identity.\n\nThis system has an expressive showcase surface and quiet reading surfaces. The homepage uses the approved gold material world; project cases, articles and notes inherit its palette and typography with an untextured ground and shared peripheral orbital motion. Functional text and controls stay semantic. The homepage composition is documented in the surface brief, not prescribed as a template for every page.",
     "keyCharacteristics": [
       "Antique gold and warm umber form one coherent palette.",
       "Real raster sand and metal provide material depth.",
       "Humanist Latin type and system CJK text remain legible.",
       "Project evidence stays independent of decorative artwork.",
-      "Slow bounded dust, a visible pause control and immediate manual switching keep motion subordinate to reading."
+      "Traveling gold points follow real raster ridges at home and peripheral geometric orbits on inner pages; foreground content stays stable with a shared pause control."
     ],
     "rules": [
       {
@@ -527,7 +537,7 @@
       },
       {
         "name": "The Bounded Motion Rule",
-        "body": "Only background grains drift continuously. Preserve the pause control, reduced-motion fallback and manual project selection; keep evidence stable while it is read.",
+        "body": "Only background light and grains loop continuously. Preserve the pause control, reduced-motion fallback and manual project selection; keep evidence stable while it is read.",
         "section": "components"
       }
     ],

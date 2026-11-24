@@ -1,6 +1,7 @@
 ---
 import SITE_CONFIG from '../../site.config';
 import sun from '../../assets/plates/brand-sun.png';
+import MotionToggle from './MotionToggle.astro';
 
 interface Props { active?: string; home?: boolean }
 const { active, home = false } = Astro.props;
@@ -29,6 +30,7 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
         <li class="github-link"><a href="https://github.com/KBber">GitHub</a></li>
       </ul>
     </nav>
+    <MotionToggle />
   </div>
 </header>
 
